@@ -1,0 +1,264 @@
+<!-- ── Navbar ──────────────────────────────────────────── -->
+<nav class="navbar">
+  <div class="nav-inner">
+    <a class="nav-brand" routerLink="/">
+      <span class="logo-mark">F</span>
+      <div class="brand-text">
+        <span class="brand-name">Finance Dashboard</span>
+        <span class="brand-sub">Gestão financeira</span>
+      </div>
+    </a>
+    <div class="nav-actions">
+      <a class="nav-ghost" routerLink="/auth/login">Entrar</a>
+      <a class="nav-primary" routerLink="/auth/login">Começar grátis</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ── Hero ───────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="dot-grid"></div>
+    <div class="gradient-line"></div>
+  </div>
+
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        Gestão financeira inteligente
+      </div>
+
+      <h1 class="hero-title">
+        Tome controle<br>
+        total das suas<br>
+        <em class="accent">finanças.</em>
+      </h1>
+
+      <p class="hero-sub">
+        Monitore gastos, acompanhe receitas e visualize sua saúde financeira com precisão — tudo em um único lugar.
+      </p>
+
+      <div class="hero-ctas">
+        <a class="cta-primary" routerLink="/auth/login">
+          Começar gratuitamente
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+        <a class="cta-ghost" routerLink="/auth/login">Já tenho conta</a>
+      </div>
+
+      <div class="hero-trust">
+        <div class="trust-avatars">
+          <span class="av av-1">R</span>
+          <span class="av av-2">M</span>
+          <span class="av av-3">J</span>
+        </div>
+        <span class="trust-text">+10.000 usuários confiam</span>
+      </div>
+    </div>
+
+    <!-- CSS Dashboard Mockup -->
+    <div class="hero-visual">
+      <div class="mockup-card">
+        <div class="mockup-topbar">
+          <div class="win-dots">
+            <span></span><span></span><span></span>
+          </div>
+          <span class="win-label">Visão Geral</span>
+          <span class="live-badge">
+            <span class="live-dot"></span>Ao vivo
+          </span>
+        </div>
+
+        <div class="mockup-balance">
+          <span class="bal-label">Saldo Total</span>
+          <span class="bal-value">R$ 24.891,50</span>
+          <span class="bal-trend">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+            +12,4% este mês
+          </span>
+        </div>
+
+        <div class="mockup-chart">
+          <div class="chart-bars">
+            <div class="cbar" style="height:38%"></div>
+            <div class="cbar" style="height:55%"></div>
+            <div class="cbar" style="height:42%"></div>
+            <div class="cbar hi" style="height:78%"></div>
+            <div class="cbar" style="height:60%"></div>
+            <div class="cbar" style="height:68%"></div>
+            <div class="cbar hi" style="height:88%"></div>
+          </div>
+          <div class="chart-months">
+            <span>Jan</span><span>Fev</span><span>Mar</span>
+            <span>Abr</span><span>Mai</span><span>Jun</span><span>Jul</span>
+          </div>
+        </div>
+
+        <div class="mockup-divider"></div>
+
+        <div class="mockup-txns">
+          <div class="txn">
+            <div class="txn-icon out">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+            </div>
+            <div class="txn-info">
+              <span class="txn-name">Supermercado</span>
+              <span class="txn-date">Hoje, 14:32</span>
+            </div>
+            <span class="txn-amt out">-R$ 187,40</span>
+          </div>
+          <div class="txn">
+            <div class="txn-icon in">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+            </div>
+            <div class="txn-info">
+              <span class="txn-name">Salário</span>
+              <span class="txn-date">01 Jul, 09:00</span>
+            </div>
+            <span class="txn-amt in">+R$ 8.500,00</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Secondary float card -->
+      <div class="mockup-mini">
+        <span class="mini-label">Meta de economia</span>
+        <span class="mini-value">R$ 3.240</span>
+        <div class="mini-bar">
+          <div class="mini-fill"></div>
+        </div>
+        <div class="mini-footer">
+          <span class="mini-pct">68% atingido</span>
+          <span class="mini-target">Meta: R$ 4.800</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Stats Bar ───────────────────────────────────────── -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat">
+      <span class="stat-num">10k+</span>
+      <span class="stat-lbl">Usuários Ativos</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <span class="stat-num">R$ 2M+</span>
+      <span class="stat-lbl">Gerenciados</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <span class="stat-num">99,9%</span>
+      <span class="stat-lbl">Uptime garantido</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── Features ───────────────────────────────────────── -->
+<section class="features">
+  <div class="features-inner">
+    <div class="section-head">
+      <p class="section-eyebrow">Funcionalidades</p>
+      <h2 class="section-title">
+        Tudo que você precisa,<br>
+        <span class="accent">em um só lugar.</span>
+      </h2>
+      <p class="section-sub">Ferramentas poderosas para quem leva finanças a sério.</p>
+    </div>
+
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+          </svg>
+        </div>
+        <h3 class="feat-title">Transações em tempo real</h3>
+        <p class="feat-desc">Registre e acompanhe cada movimentação instantaneamente. Categorização automática e histórico completo.</p>
+        <div class="feat-arrow">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+        <div class="feat-glow"></div>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="20" x2="18" y2="10"/>
+            <line x1="12" y1="20" x2="12" y2="4"/>
+            <line x1="6" y1="20" x2="6" y2="14"/>
+            <line x1="2" y1="20" x2="22" y2="20"/>
+          </svg>
+        </div>
+        <h3 class="feat-title">Relatórios detalhados</h3>
+        <p class="feat-desc">Visualize seus dados em gráficos claros. Identifique padrões e tome decisões embasadas em dados reais.</p>
+        <div class="feat-arrow">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+        <div class="feat-glow"></div>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </div>
+        <h3 class="feat-title">Segurança bancária</h3>
+        <p class="feat-desc">Dados protegidos com criptografia de nível bancário. Sua privacidade é inegociável.</p>
+        <div class="feat-arrow">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+        <div class="feat-glow"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ────────────────────────────────────────────── -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <div class="cta-card">
+      <div class="cta-orb"></div>
+      <div class="cta-content">
+        <p class="cta-eyebrow">Comece hoje mesmo</p>
+        <h2 class="cta-title">Pronto para transformar suas finanças?</h2>
+        <p class="cta-sub">Crie sua conta gratuita em menos de 2 minutos. Sem cartão de crédito.</p>
+        <a class="cta-btn" routerLink="/auth/login">
+          Criar conta grátis
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ─────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <span class="logo-mark sm">F</span>
+        <span class="footer-name">Finance Dashboard</span>
+      </div>
+      <p class="footer-tagline">Controle financeiro inteligente para o dia a dia.</p>
+    </div>
+    <div class="footer-links">
+      <a routerLink="/auth/login">Entrar</a>
+      <a routerLink="/auth/login">Criar conta</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Finance Dashboard. Todos os direitos reservados.</span>
+  </div>
+</footer>

@@ -1,0 +1,147 @@
+<p-toast></p-toast>
+
+<div class="auth-layout">
+
+  <!-- LEFT: Brand Panel -->
+  <aside class="brand-panel">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <div class="brand-content">
+      <div class="brand-logo">
+        <span class="logo-mark">F</span>
+        <div>
+          <div class="logo-name">Finance Dashboard</div>
+          <div class="logo-sub">Gestão financeira inteligente</div>
+        </div>
+      </div>
+
+      <h2 class="brand-headline">
+        Controle total<br>das suas <span class="accent">finanças.</span>
+      </h2>
+      <p class="brand-tagline">
+        Monitore transações, visualize relatórios e tome decisões financeiras com clareza e precisão.
+      </p>
+
+      <div class="chart-visual">
+        <div class="chart-bar" style="height: 28px"></div>
+        <div class="chart-bar" style="height: 44px"></div>
+        <div class="chart-bar" style="height: 36px"></div>
+        <div class="chart-bar highlight" style="height: 64px"></div>
+        <div class="chart-bar" style="height: 48px"></div>
+        <div class="chart-bar" style="height: 56px"></div>
+        <div class="chart-bar highlight" style="height: 72px"></div>
+      </div>
+
+      <div class="features">
+        <div class="feature-item" style="--fi: 0">
+          <span class="feature-icon">✓</span>
+          Gestão de transações em tempo real
+        </div>
+        <div class="feature-item" style="--fi: 1">
+          <span class="feature-icon">✓</span>
+          Dashboard com relatórios detalhados
+        </div>
+        <div class="feature-item" style="--fi: 2">
+          <span class="feature-icon">✓</span>
+          Controle completo do seu patrimônio
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- RIGHT: Form Panel -->
+  <main class="form-panel">
+    <div class="form-card">
+      <a href="/" class="back-home">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 12H5M5 12l7 7M5 12l7-7"/>
+        </svg>
+        Página inicial
+      </a>
+
+      <div class="form-header" [@modeSwitch]="isRegisterMode">
+        <p class="form-eyebrow">{{ isRegisterMode ? 'Novo usuário' : 'Bem-vindo de volta' }}</p>
+        <h1 class="form-title">{{ isRegisterMode ? 'Criar conta' : 'Entrar' }}</h1>
+        <p class="form-subtitle">
+          {{ isRegisterMode ? 'Preencha seus dados para começar' : 'Acesse sua conta financeira' }}
+        </p>
+      </div>
+
+      <form (submit)="$event.preventDefault()">
+        <div class="input-group" style="--ig: 0">
+          <label class="input-label" for="email">E-mail</label>
+          <input
+            #emailInput
+            class="input-field"
+            id="email"
+            name="email"
+            type="email"
+            autocomplete="email"
+            placeholder="seu@email.com"
+          />
+        </div>
+
+        <div class="input-group" style="--ig: 1">
+          <label class="input-label" for="password">Senha</label>
+          <input
+            #passwordInput
+            class="input-field"
+            id="password"
+            name="password"
+            type="password"
+            autocomplete="current-password"
+            placeholder="••••••••"
+          />
+        </div>
+
+        <div *ngIf="!isRegisterMode">
+            <a href="/auth/forgot-password" class="forgot-btn">Esqueci minha senha</a>
+        </div>
+
+        <div class="register-fields" [class.visible]="isRegisterMode">
+          <div class="form-divider"></div>
+
+          <div class="input-group">
+            <label class="input-label">Nome completo</label>
+            <input #fullNameInput class="input-field" type="text" placeholder="Seu nome completo" />
+          </div>
+
+          <div class="input-group">
+            <label class="input-label">Endereço</label>
+            <input #addressInput class="input-field" type="text" placeholder="Rua, número, bairro" />
+          </div>
+
+          <div class="input-group">
+            <label class="input-label">Telefone</label>
+            <input #phoneNumberInput class="input-field" type="tel" placeholder="(00) 00000-0000" />
+          </div>
+        </div>
+
+        <div class="form-divider animate-divider"></div>
+
+        <button
+          type="button"
+          class="btn-primary"
+          (click)="submitAuth(
+            emailInput.value,
+            passwordInput.value,
+            isRegisterMode,
+            isRegisterMode ? fullNameInput.value : undefined,
+            isRegisterMode ? addressInput.value : undefined,
+            isRegisterMode ? phoneNumberInput.value : undefined
+          )"
+        >
+          <span class="btn-text">{{ isRegisterMode ? 'Criar conta' : 'Entrar na plataforma' }}</span>
+          <span class="btn-shimmer"></span>
+        </button>
+
+        <button type="button" class="btn-secondary" (click)="toggleMode()">
+          {{ isRegisterMode ? 'Já tenho uma conta' : 'Criar nova conta' }}
+        </button>
+      </form>
+    </div>
+  </main>
+
+</div>

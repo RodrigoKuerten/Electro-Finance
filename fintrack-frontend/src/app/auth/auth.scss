@@ -1,0 +1,631 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap');
+
+// ── Variables ──────────────────────────────────────────────
+$emerald:       #10b981;
+$emerald-light: #34d399;
+$emerald-dark:  #059669;
+$bg:            #0d1117;
+$bg-left:       #0a1628;
+$border:        rgba(255, 255, 255, 0.08);
+$text:          #eef2f7;
+$text-muted:    #8892a4;
+$input-bg:      rgba(255, 255, 255, 0.04);
+$input-border:  rgba(255, 255, 255, 0.1);
+
+// ── Keyframes ──────────────────────────────────────────────
+
+@keyframes enterLeft {
+  from { opacity: 0; transform: translateX(-28px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes enterRight {
+  from { opacity: 0; transform: translateX(32px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes enterUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes meshPulse {
+  0%   { opacity: 0.7; transform: scale(1) rotate(0deg); }
+  100% { opacity: 1;   transform: scale(1.05) rotate(0.5deg); }
+}
+
+@keyframes orbFloat {
+  0%   { transform: translateY(0) translateX(0) rotate(0deg); }
+  33%  { transform: translateY(-24px) translateX(14px) rotate(5deg); }
+  66%  { transform: translateY(14px) translateX(-18px) rotate(-3deg); }
+  100% { transform: translateY(0) translateX(0) rotate(0deg); }
+}
+
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 28px rgba(16, 185, 129, 0.45); }
+  50%       { box-shadow: 0 0 50px rgba(16, 185, 129, 0.75), 0 0 80px rgba(16, 185, 129, 0.2); }
+}
+
+@keyframes barRise {
+  from { transform: scaleY(0); opacity: 0; }
+  to   { transform: scaleY(1); opacity: 1; }
+}
+
+@keyframes barBreathe {
+  0%, 100% { transform: scaleY(1); filter: brightness(1); }
+  50%       { transform: scaleY(1.06); filter: brightness(1.3); }
+}
+
+@keyframes featureSlide {
+  from { opacity: 0; transform: translateX(-16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes expandWidth {
+  from { transform: scaleX(0); opacity: 0; }
+  to   { transform: scaleX(1); opacity: 1; }
+}
+
+@keyframes shimmerSlide {
+  0%   { transform: translateX(-100%) skewX(-15deg); }
+  100% { transform: translateX(250%) skewX(-15deg); }
+}
+
+@keyframes ripple {
+  0%   { transform: scale(0); opacity: 0.4; }
+  100% { transform: scale(4); opacity: 0; }
+}
+
+@keyframes inputFocusGlow {
+  0%   { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+  70%  { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+// ── Host ───────────────────────────────────────────────────
+:host {
+  display: block;
+  min-height: 100dvh;
+  font-family: 'DM Sans', sans-serif;
+}
+
+// ── Layout ─────────────────────────────────────────────────
+.auth-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100dvh;
+  color: $text;
+  background: $bg;
+}
+
+// ── Left: Brand Panel ──────────────────────────────────────
+.brand-panel {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(150deg, #091525 0%, #0d2137 45%, #091a29 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 60px 52px;
+}
+
+.brand-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 15% 25%, rgba(16, 185, 129, 0.14) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 50% at 85% 75%, rgba(52, 211, 153, 0.08) 0%, transparent 50%);
+  animation: meshPulse 9s ease-in-out infinite alternate;
+}
+
+.brand-panel::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(16, 185, 129, 0.07) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+// Floating orbs
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  animation: orbFloat linear infinite;
+  pointer-events: none;
+}
+
+.orb-1 {
+  width: 300px;
+  height: 300px;
+  background: $emerald;
+  opacity: 0.1;
+  top: -100px;
+  right: -80px;
+  animation-duration: 14s;
+}
+
+.orb-2 {
+  width: 220px;
+  height: 220px;
+  background: #06d6a0;
+  opacity: 0.08;
+  bottom: 15%;
+  left: -70px;
+  animation-duration: 11s;
+  animation-delay: -4s;
+}
+
+.orb-3 {
+  width: 160px;
+  height: 160px;
+  background: #0ea5e9;
+  opacity: 0.07;
+  bottom: -50px;
+  right: 25%;
+  animation-duration: 17s;
+  animation-delay: -8s;
+}
+
+// Brand content
+.brand-content {
+  position: relative;
+  z-index: 1;
+}
+
+// ── Brand Logo ─────────────────────────────────────────────
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 52px;
+  animation: enterLeft 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.05s both;
+}
+
+.logo-mark {
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
+  background: $emerald;
+  border-radius: 13px;
+  display: grid;
+  place-items: center;
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 1.4rem;
+  color: #fff;
+  animation: glowPulse 3.5s ease-in-out infinite;
+  transition: transform 0.2s ease;
+
+  &:hover { transform: scale(1.08) rotate(-3deg); }
+}
+
+.logo-name {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: $text;
+  letter-spacing: -0.01em;
+}
+
+.logo-sub {
+  font-size: 0.78rem;
+  color: $text-muted;
+  margin-top: 2px;
+}
+
+// ── Brand Headline ─────────────────────────────────────────
+.brand-headline {
+  font-family: 'Syne', sans-serif;
+  font-size: 2.6rem;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin: 0 0 18px;
+  animation: enterLeft 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.15s both;
+
+  .accent {
+    color: $emerald;
+    display: inline-block;
+    transition: text-shadow 0.3s ease;
+
+    &:hover {
+      text-shadow: 0 0 30px rgba(16, 185, 129, 0.6);
+    }
+  }
+}
+
+.brand-tagline {
+  font-size: 0.95rem;
+  color: $text-muted;
+  line-height: 1.65;
+  max-width: 340px;
+  margin-bottom: 48px;
+  animation: enterLeft 0.6s ease-out 0.28s both;
+}
+
+// ── Chart ──────────────────────────────────────────────────
+.chart-visual {
+  display: flex;
+  align-items: flex-end;
+  gap: 7px;
+  height: 72px;
+  margin-bottom: 44px;
+  animation: enterLeft 0.6s ease-out 0.38s both;
+}
+
+.chart-bar {
+  flex: 1;
+  border-radius: 4px 4px 0 0;
+  background: rgba(16, 185, 129, 0.13);
+  border: 1px solid rgba(16, 185, 129, 0.18);
+  transform-origin: bottom;
+  animation: barRise 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+
+  @for $i from 1 through 7 {
+    &:nth-child(#{$i}) {
+      animation-delay: #{0.45 + ($i - 1) * 0.07}s;
+    }
+  }
+
+  &.highlight {
+    background: linear-gradient(to top, rgba(16, 185, 129, 0.55), rgba(16, 185, 129, 0.18));
+    border-color: rgba(16, 185, 129, 0.5);
+    animation: barRise 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) both,
+               barBreathe 3.5s ease-in-out 1.5s infinite;
+  }
+}
+
+// ── Features ───────────────────────────────────────────────
+.features {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  font-size: 0.87rem;
+  color: $text-muted;
+  animation: featureSlide 0.5s ease-out both;
+  animation-delay: calc(0.9s + var(--fi, 0) * 0.1s);
+  transition: color 0.2s ease, transform 0.2s ease;
+  cursor: default;
+
+  &:hover {
+    color: $text;
+    transform: translateX(5px);
+
+    .feature-icon {
+      background: rgba(16, 185, 129, 0.2);
+      border-color: rgba(16, 185, 129, 0.5);
+      transform: scale(1.1);
+    }
+  }
+}
+
+.feature-icon {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  border-radius: 6px;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.22);
+  display: grid;
+  place-items: center;
+  color: $emerald;
+  font-size: 0.7rem;
+  font-weight: 700;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+}
+
+// ── Right: Form Panel ──────────────────────────────────────
+.back-home {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: $text-muted;
+  text-decoration: none;
+  margin-bottom: 24px;
+  transition: color 0.2s ease, transform 0.2s ease;
+
+  svg { transition: transform 0.2s ease; }
+
+  &:hover {
+    color: $emerald;
+    transform: translateX(-3px);
+    svg { transform: translateX(-2px); }
+  }
+}
+
+.form-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 40px;
+  background: $bg;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(16, 185, 129, 0.04) 0%, transparent 60%);
+    pointer-events: none;
+  }
+}
+
+.form-card {
+  width: 100%;
+  max-width: 420px;
+  position: relative;
+  z-index: 1;
+  animation: enterRight 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.08s both;
+}
+
+// Form header — Angular @modeSwitch handles transition
+.form-header {
+  margin-bottom: 36px;
+}
+
+.form-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  color: $emerald;
+  margin: 0 0 10px;
+  animation: enterUp 0.5s ease-out 0.25s both;
+}
+
+.form-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: $text;
+  line-height: 1.15;
+  margin: 0 0 8px;
+  animation: enterUp 0.5s ease-out 0.3s both;
+}
+
+.form-subtitle {
+  font-size: 0.88rem;
+  color: $text-muted;
+  margin: 0;
+  animation: enterUp 0.5s ease-out 0.35s both;
+}
+
+// ── Input Group ────────────────────────────────────────────
+.input-group {
+  margin-bottom: 18px;
+  animation: enterUp 0.5s ease-out both;
+  animation-delay: calc(0.4s + var(--ig, 0) * 0.08s);
+}
+
+.input-label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: $text-muted;
+  margin-bottom: 7px;
+  transition: color 0.2s ease;
+}
+
+.input-group:focus-within .input-label {
+  color: $emerald;
+}
+
+.input-field {
+  width: 100%;
+  height: 48px;
+  box-sizing: border-box;
+  background: $input-bg;
+  border: 1px solid $input-border;
+  border-radius: 10px;
+  padding: 0 16px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  color: $text;
+  transition: border-color 0.22s ease, box-shadow 0.22s ease, background 0.22s ease, transform 0.15s ease;
+  appearance: none;
+
+  &::placeholder {
+    color: rgba(136, 146, 164, 0.4);
+    transition: opacity 0.2s ease;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $emerald;
+    background: rgba(16, 185, 129, 0.04);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.14), 0 1px 4px rgba(0, 0, 0, 0.25);
+    transform: translateY(-1px);
+
+    &::placeholder { opacity: 0.5; }
+  }
+
+  &:hover:not(:focus) {
+    border-color: rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  &:-webkit-autofill,
+  &:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 1000px #131c2e inset;
+    -webkit-text-fill-color: $text;
+    transition: background-color 600000s;
+  }
+}
+
+// ── Forgot password ────────────────────────────────────────
+.forgot-btn {
+  display: inline-block;
+  background: none;
+  border: none;
+  color: $emerald;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.82rem;
+  cursor: pointer;
+  padding: 0;
+  margin: -6px 0 4px;
+  opacity: 0.8;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  animation: enterUp 0.4s ease-out 0.56s both;
+
+  &:hover {
+    opacity: 1;
+    transform: translateX(2px);
+  }
+}
+
+// ── Register fields ────────────────────────────────────────
+.register-fields {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.35s ease;
+
+  &.visible {
+    max-height: 600px;
+    opacity: 1;
+  }
+}
+
+// ── Divider ────────────────────────────────────────────────
+.form-divider {
+  height: 1px;
+  background: $border;
+  margin: 22px 0;
+
+  &.animate-divider {
+    animation: expandWidth 0.6s ease-out 0.5s both;
+    transform-origin: left;
+  }
+}
+
+// ── Buttons ────────────────────────────────────────────────
+.btn-primary {
+  width: 100%;
+  height: 50px;
+  background: $emerald;
+  border: none;
+  border-radius: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  letter-spacing: 0.01em;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.2s ease, transform 0.18s ease, box-shadow 0.2s ease;
+  animation: enterUp 0.5s ease-out 0.62s both;
+
+  // Top-left shimmer gradient
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, transparent 55%);
+    pointer-events: none;
+  }
+
+  &:hover {
+    background: $emerald-dark;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(16, 185, 129, 0.42), 0 4px 12px rgba(0, 0, 0, 0.3);
+
+    .btn-shimmer {
+      animation: shimmerSlide 0.65s ease-in-out;
+    }
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+    transition-duration: 0.06s;
+  }
+}
+
+.btn-text {
+  position: relative;
+  z-index: 1;
+}
+
+.btn-shimmer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 45%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.22), transparent);
+  pointer-events: none;
+}
+
+.btn-secondary {
+  width: 100%;
+  height: 46px;
+  background: transparent;
+  border: 1px solid $border;
+  border-radius: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: $text-muted;
+  cursor: pointer;
+  margin-top: 12px;
+  letter-spacing: 0.01em;
+  transition: border-color 0.22s ease, color 0.22s ease, background 0.22s ease, transform 0.18s ease;
+  animation: enterUp 0.5s ease-out 0.7s both;
+
+  &:hover {
+    border-color: rgba(16, 185, 129, 0.4);
+    color: $emerald;
+    background: rgba(16, 185, 129, 0.05);
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+    transition-duration: 0.06s;
+  }
+}
+
+// ── Mobile ─────────────────────────────────────────────────
+@media (max-width: 800px) {
+  .auth-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .brand-panel {
+    padding: 36px 28px 32px;
+  }
+
+  .brand-headline {
+    font-size: 1.85rem;
+  }
+
+  .brand-tagline {
+    margin-bottom: 0;
+    font-size: 0.88rem;
+  }
+
+  .chart-visual,
+  .features {
+    display: none;
+  }
+
+  .brand-logo {
+    margin-bottom: 20px;
+  }
+
+  .form-panel {
+    padding: 40px 24px;
+  }
+}
