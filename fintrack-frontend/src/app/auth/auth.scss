@@ -1,10 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap');
 
-// ── Variables ──────────────────────────────────────────────
 $emerald:       #10b981;
 $emerald-light: #34d399;
 $emerald-dark:  #059669;
-$bg:            #0d1117;
+$bg:            #0a0a0a;
 $bg-left:       #0a1628;
 $border:        rgba(255, 255, 255, 0.08);
 $text:          #eef2f7;
@@ -12,7 +11,11 @@ $text-muted:    #8892a4;
 $input-bg:      rgba(255, 255, 255, 0.04);
 $input-border:  rgba(255, 255, 255, 0.1);
 
-// ── Keyframes ──────────────────────────────────────────────
+
+@keyframes barReveal {
+  from { opacity: 0; transform: translateX(-5px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
 
 @keyframes enterLeft {
   from { opacity: 0; transform: translateX(-28px); }
@@ -82,14 +85,12 @@ $input-border:  rgba(255, 255, 255, 0.1);
   100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
 }
 
-// ── Host ───────────────────────────────────────────────────
 :host {
   display: block;
   min-height: 100dvh;
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Inter', 'DM Sans', sans-serif;
 }
 
-// ── Layout ─────────────────────────────────────────────────
 .auth-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -98,7 +99,6 @@ $input-border:  rgba(255, 255, 255, 0.1);
   background: $bg;
 }
 
-// ── Left: Brand Panel ──────────────────────────────────────
 .brand-panel {
   position: relative;
   overflow: hidden;
@@ -127,7 +127,6 @@ $input-border:  rgba(255, 255, 255, 0.1);
   background-size: 28px 28px;
 }
 
-// Floating orbs
 .orb {
   position: absolute;
   border-radius: 50%;
@@ -168,13 +167,11 @@ $input-border:  rgba(255, 255, 255, 0.1);
   animation-delay: -8s;
 }
 
-// Brand content
 .brand-content {
   position: relative;
   z-index: 1;
 }
 
-// ── Brand Logo ─────────────────────────────────────────────
 .brand-logo {
   display: flex;
   align-items: center;
@@ -187,37 +184,48 @@ $input-border:  rgba(255, 255, 255, 0.1);
   width: 50px;
   height: 50px;
   flex-shrink: 0;
-  background: $emerald;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
   border-radius: 13px;
-  display: grid;
-  place-items: center;
-  font-family: 'Syne', sans-serif;
-  font-weight: 800;
-  font-size: 1.4rem;
-  color: #fff;
-  animation: glowPulse 3.5s ease-in-out infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: transform 0.2s ease;
 
-  &:hover { transform: scale(1.08) rotate(-3deg); }
+  svg rect {
+    animation: barReveal 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    &:nth-child(1) { animation-delay: 0.4s; }
+    &:nth-child(2) { animation-delay: 0.52s; }
+    &:nth-child(3) { animation-delay: 0.64s; }
+  }
+
+  &:hover { transform: scale(1.05); }
 }
 
-.logo-name {
-  font-family: 'Syne', sans-serif;
+.logo-wordmark {
+  display: flex;
+  align-items: baseline;
+  line-height: 1;
+}
+
+.brand-electro {
+  font-family: 'Inter', 'DM Sans', sans-serif;
   font-weight: 700;
   font-size: 1rem;
   color: $text;
   letter-spacing: -0.01em;
 }
 
-.logo-sub {
-  font-size: 0.78rem;
+.brand-finance {
+  font-family: 'Inter', 'DM Sans', sans-serif;
+  font-weight: 300;
+  font-size: 1rem;
   color: $text-muted;
-  margin-top: 2px;
+  letter-spacing: -0.01em;
 }
 
-// ── Brand Headline ─────────────────────────────────────────
 .brand-headline {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Inter', 'DM Sans', sans-serif;
   font-size: 2.6rem;
   font-weight: 800;
   line-height: 1.1;
@@ -245,7 +253,6 @@ $input-border:  rgba(255, 255, 255, 0.1);
   animation: enterLeft 0.6s ease-out 0.28s both;
 }
 
-// ── Chart ──────────────────────────────────────────────────
 .chart-visual {
   display: flex;
   align-items: flex-end;
@@ -277,7 +284,6 @@ $input-border:  rgba(255, 255, 255, 0.1);
   }
 }
 
-// ── Features ───────────────────────────────────────────────
 .features {
   display: flex;
   flex-direction: column;
@@ -322,7 +328,6 @@ $input-border:  rgba(255, 255, 255, 0.1);
   transition: background 0.2s, border-color 0.2s, transform 0.2s;
 }
 
-// ── Right: Form Panel ──────────────────────────────────────
 .back-home {
   display: inline-flex;
   align-items: center;
@@ -364,10 +369,14 @@ $input-border:  rgba(255, 255, 255, 0.1);
   max-width: 420px;
   position: relative;
   z-index: 1;
-  animation: enterRight 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.08s both;
+  animation: formIn 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both;
 }
 
-// Form header — Angular @modeSwitch handles transition
+@keyframes formIn {
+  from { opacity: 0; transform: translateX(24px) scale(0.98); }
+  to   { opacity: 1; transform: translateX(0) scale(1); }
+}
+
 .form-header {
   margin-bottom: 36px;
 }
@@ -383,7 +392,7 @@ $input-border:  rgba(255, 255, 255, 0.1);
 }
 
 .form-title {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Inter', 'DM Sans', sans-serif;
   font-size: 2rem;
   font-weight: 800;
   letter-spacing: -0.03em;
@@ -400,7 +409,6 @@ $input-border:  rgba(255, 255, 255, 0.1);
   animation: enterUp 0.5s ease-out 0.35s both;
 }
 
-// ── Input Group ────────────────────────────────────────────
 .input-group {
   margin-bottom: 18px;
   animation: enterUp 0.5s ease-out both;
@@ -428,7 +436,7 @@ $input-border:  rgba(255, 255, 255, 0.1);
   border: 1px solid $input-border;
   border-radius: 10px;
   padding: 0 16px;
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Inter', 'DM Sans', sans-serif;
   font-size: 0.95rem;
   color: $text;
   transition: border-color 0.22s ease, box-shadow 0.22s ease, background 0.22s ease, transform 0.15s ease;
@@ -462,13 +470,12 @@ $input-border:  rgba(255, 255, 255, 0.1);
   }
 }
 
-// ── Forgot password ────────────────────────────────────────
 .forgot-btn {
   display: inline-block;
   background: none;
   border: none;
   color: $emerald;
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Inter', 'DM Sans', sans-serif;
   font-size: 0.82rem;
   cursor: pointer;
   padding: 0;
@@ -483,7 +490,6 @@ $input-border:  rgba(255, 255, 255, 0.1);
   }
 }
 
-// ── Register fields ────────────────────────────────────────
 .register-fields {
   overflow: hidden;
   max-height: 0;
@@ -497,7 +503,6 @@ $input-border:  rgba(255, 255, 255, 0.1);
   }
 }
 
-// ── Divider ────────────────────────────────────────────────
 .form-divider {
   height: 1px;
   background: $border;
@@ -509,14 +514,13 @@ $input-border:  rgba(255, 255, 255, 0.1);
   }
 }
 
-// ── Buttons ────────────────────────────────────────────────
 .btn-primary {
   width: 100%;
   height: 50px;
-  background: $emerald;
+  background: linear-gradient(135deg, $emerald-dark 0%, $emerald 100%);
   border: none;
   border-radius: 10px;
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Inter', 'DM Sans', sans-serif;
   font-size: 0.95rem;
   font-weight: 600;
   color: #fff;
@@ -524,10 +528,9 @@ $input-border:  rgba(255, 255, 255, 0.1);
   letter-spacing: 0.01em;
   position: relative;
   overflow: hidden;
-  transition: background 0.2s ease, transform 0.18s ease, box-shadow 0.2s ease;
+  transition: opacity 0.2s ease, transform 0.18s ease, box-shadow 0.2s ease;
   animation: enterUp 0.5s ease-out 0.62s both;
 
-  // Top-left shimmer gradient
   &::before {
     content: '';
     position: absolute;
@@ -537,7 +540,7 @@ $input-border:  rgba(255, 255, 255, 0.1);
   }
 
   &:hover {
-    background: $emerald-dark;
+    opacity: 0.9;
     transform: translateY(-2px);
     box-shadow: 0 10px 30px rgba(16, 185, 129, 0.42), 0 4px 12px rgba(0, 0, 0, 0.3);
 
@@ -574,7 +577,7 @@ $input-border:  rgba(255, 255, 255, 0.1);
   background: transparent;
   border: 1px solid $border;
   border-radius: 10px;
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Inter', 'DM Sans', sans-serif;
   font-size: 0.88rem;
   font-weight: 500;
   color: $text-muted;
@@ -597,7 +600,6 @@ $input-border:  rgba(255, 255, 255, 0.1);
   }
 }
 
-// ── Mobile ─────────────────────────────────────────────────
 @media (max-width: 800px) {
   .auth-layout {
     grid-template-columns: 1fr;

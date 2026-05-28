@@ -2,7 +2,6 @@
 
 <div class="auth-layout">
 
-  <!-- LEFT: Brand Panel -->
   <aside class="brand-panel">
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
@@ -10,10 +9,23 @@
 
     <div class="brand-content">
       <div class="brand-logo">
-        <span class="logo-mark">F</span>
+        <span class="logo-mark">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+            <rect x="2" y="4"  width="20" height="3.5" rx="1.75" fill="url(#lg-auth)"/>
+            <rect x="2" y="10" width="14" height="3.5" rx="1.75" fill="url(#lg-auth)"/>
+            <rect x="2" y="16" width="8"  height="3.5" rx="1.75" fill="url(#lg-auth)"/>
+            <defs>
+              <linearGradient id="lg-auth" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#10b981"/>
+                <stop offset="100%" stop-color="#6ee7b7"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </span>
         <div>
-          <div class="logo-name">Finance Dashboard</div>
-          <div class="logo-sub">Gestão financeira inteligente</div>
+          <div class="logo-wordmark">
+            <span class="brand-electro">Electro</span><span class="brand-finance"> Finance</span>
+          </div>
         </div>
       </div>
 
@@ -36,22 +48,36 @@
 
       <div class="features">
         <div class="feature-item" style="--fi: 0">
-          <span class="feature-icon">✓</span>
+          <span class="feature-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="m9 12 2 2 4-4"/>
+            </svg>
+          </span>
           Gestão de transações em tempo real
         </div>
         <div class="feature-item" style="--fi: 1">
-          <span class="feature-icon">✓</span>
+          <span class="feature-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="m9 12 2 2 4-4"/>
+            </svg>
+          </span>
           Dashboard com relatórios detalhados
         </div>
         <div class="feature-item" style="--fi: 2">
-          <span class="feature-icon">✓</span>
+          <span class="feature-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="m9 12 2 2 4-4"/>
+            </svg>
+          </span>
           Controle completo do seu patrimônio
         </div>
       </div>
     </div>
   </aside>
 
-  <!-- RIGHT: Form Panel -->
   <main class="form-panel">
     <div class="form-card">
       <a href="/" class="back-home">

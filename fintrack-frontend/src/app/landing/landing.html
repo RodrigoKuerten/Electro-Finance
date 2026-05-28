@@ -1,13 +1,28 @@
-<!-- ── Navbar ──────────────────────────────────────────── -->
 <nav class="navbar">
   <div class="nav-inner">
     <a class="nav-brand" routerLink="/">
-      <span class="logo-mark">F</span>
-      <div class="brand-text">
-        <span class="brand-name">Finance Dashboard</span>
-        <span class="brand-sub">Gestão financeira</span>
+      <span class="logo-mark">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+          <rect x="2" y="4"  width="20" height="3.5" rx="1.75" fill="url(#lg-nav)"/>
+          <rect x="2" y="10" width="14" height="3.5" rx="1.75" fill="url(#lg-nav)"/>
+          <rect x="2" y="16" width="8"  height="3.5" rx="1.75" fill="url(#lg-nav)"/>
+          <defs>
+            <linearGradient id="lg-nav" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#10b981"/>
+              <stop offset="100%" stop-color="#6ee7b7"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </span>
+      <div class="brand-wordmark">
+        <span class="brand-electro">Electro</span><span class="brand-finance"> Finance</span>
       </div>
     </a>
+    <nav class="nav-links">
+      <a class="nav-link" href="#como-funciona"   (click)="scrollTo($event, 'como-funciona')">Como funciona</a>
+      <a class="nav-link" href="#funcionalidades"  (click)="scrollTo($event, 'funcionalidades')">Funcionalidades</a>
+      <a class="nav-link" href="#depoimentos"      (click)="scrollTo($event, 'depoimentos')">Depoimentos</a>
+    </nav>
     <div class="nav-actions">
       <a class="nav-ghost" routerLink="/auth/login">Entrar</a>
       <a class="nav-primary" routerLink="/auth/login">Começar grátis</a>
@@ -15,13 +30,19 @@
   </div>
 </nav>
 
-<!-- ── Hero ───────────────────────────────────────────── -->
 <section class="hero">
   <div class="hero-bg">
+    <video
+      #heroVideo
+      class="hero-video"
+      src="https://stream.mux.com/Kec29dVyJgiPdtWaQtPuEiiGHkJIYQAVUJcNiIHUYeo.m3u8"
+      [muted]="true" playsinline autoplay loop
+      aria-hidden="true"
+    ></video>
+    <div class="hero-video-overlay"></div>
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
     <div class="orb orb-3"></div>
-    <div class="dot-grid"></div>
     <div class="gradient-line"></div>
   </div>
 
@@ -48,6 +69,7 @@
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M5 12h14M12 5l7 7-7 7"/>
           </svg>
+          <span class="btn-shimmer" aria-hidden="true"></span>
         </a>
         <a class="cta-ghost" routerLink="/auth/login">Já tenho conta</a>
       </div>
@@ -62,8 +84,8 @@
       </div>
     </div>
 
-    <!-- CSS Dashboard Mockup -->
     <div class="hero-visual">
+      <div class="mockup-tilt-wrap">
       <div class="mockup-card">
         <div class="mockup-topbar">
           <div class="win-dots">
@@ -125,8 +147,8 @@
           </div>
         </div>
       </div>
+      </div>
 
-      <!-- Secondary float card -->
       <div class="mockup-mini">
         <span class="mini-label">Meta de economia</span>
         <span class="mini-value">R$ 3.240</span>
@@ -142,28 +164,52 @@
   </div>
 </section>
 
-<!-- ── Stats Bar ───────────────────────────────────────── -->
 <div class="stats-bar">
   <div class="stats-inner">
     <div class="stat">
+      <div class="stat-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+      </div>
       <span class="stat-num">10k+</span>
       <span class="stat-lbl">Usuários Ativos</span>
     </div>
     <div class="stat-divider"></div>
     <div class="stat">
+      <div class="stat-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>
+        </svg>
+      </div>
       <span class="stat-num">R$ 2M+</span>
       <span class="stat-lbl">Gerenciados</span>
     </div>
     <div class="stat-divider"></div>
     <div class="stat">
+      <div class="stat-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/>
+        </svg>
+      </div>
       <span class="stat-num">99,9%</span>
       <span class="stat-lbl">Uptime garantido</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <div class="stat-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+        </svg>
+      </div>
+      <span class="stat-num">4,9<span class="stat-star">★</span></span>
+      <span class="stat-lbl">Avaliação média</span>
     </div>
   </div>
 </div>
 
-<!-- ── Features ───────────────────────────────────────── -->
-<section class="features">
+<section class="features" id="funcionalidades">
   <div class="features-inner">
     <div class="section-head">
       <p class="section-eyebrow">Funcionalidades</p>
@@ -177,53 +223,201 @@
     <div class="feat-grid">
       <div class="feat-card">
         <div class="feat-icon-wrap">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1z"/>
+            <path d="M14 8H8"/>
+            <path d="M16 12H8"/>
+            <path d="M13 16H8"/>
           </svg>
         </div>
         <h3 class="feat-title">Transações em tempo real</h3>
         <p class="feat-desc">Registre e acompanhe cada movimentação instantaneamente. Categorização automática e histórico completo.</p>
-        <div class="feat-arrow">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </div>
+        <ul class="feat-list">
+          <li>Categorização automática por IA</li>
+          <li>Histórico com filtros avançados</li>
+          <li>Suporte a múltiplas categorias</li>
+          <li>Recorrências e agendamentos</li>
+        </ul>
+        <a class="feat-arrow" routerLink="/auth/login">
+          <span>Começar agora</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
         <div class="feat-glow"></div>
       </div>
 
       <div class="feat-card">
         <div class="feat-icon-wrap">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="18" y1="20" x2="18" y2="10"/>
-            <line x1="12" y1="20" x2="12" y2="4"/>
-            <line x1="6" y1="20" x2="6" y2="14"/>
-            <line x1="2" y1="20" x2="22" y2="20"/>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 3v18h18"/>
+            <path d="M18 17V9"/>
+            <path d="M13 17V5"/>
+            <path d="M8 17v-3"/>
           </svg>
         </div>
         <h3 class="feat-title">Relatórios detalhados</h3>
         <p class="feat-desc">Visualize seus dados em gráficos claros. Identifique padrões e tome decisões embasadas em dados reais.</p>
-        <div class="feat-arrow">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </div>
+        <ul class="feat-list">
+          <li>Gráficos interativos por período</li>
+          <li>Comparativo mensal e anual</li>
+          <li>Análise de gastos por categoria</li>
+          <li>Exportação em PDF e planilha</li>
+        </ul>
+        <a class="feat-arrow" routerLink="/auth/login">
+          <span>Ver relatórios</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
         <div class="feat-glow"></div>
       </div>
 
       <div class="feat-card">
         <div class="feat-icon-wrap">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="m9 12 2 2 4-4"/>
           </svg>
         </div>
         <h3 class="feat-title">Segurança bancária</h3>
         <p class="feat-desc">Dados protegidos com criptografia de nível bancário. Sua privacidade é inegociável.</p>
-        <div class="feat-arrow">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </div>
+        <ul class="feat-list">
+          <li>Criptografia AES-256 em repouso</li>
+          <li>Autenticação em dois fatores</li>
+          <li>Sessões seguras com JWT</li>
+          <li>Backup automático diário</li>
+        </ul>
+        <a class="feat-arrow" routerLink="/auth/login">
+          <span>Criar conta segura</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
         <div class="feat-glow"></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── CTA ────────────────────────────────────────────── -->
+<section class="how-it-works" id="como-funciona">
+  <div class="how-inner">
+    <div class="section-head">
+      <p class="section-eyebrow">Como funciona</p>
+      <h2 class="section-title">
+        Simples de usar,<br>
+        <span class="accent">poderoso na prática.</span>
+      </h2>
+      <p class="section-sub">Em menos de 5 minutos você tem controle total das suas finanças.</p>
+    </div>
+
+    <div class="steps-grid">
+      <div class="step-card">
+        <span class="step-bg-num">01</span>
+        <div class="step-num">01</div>
+        <div class="step-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/>
+            <path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/>
+            <path d="M18 12a2 2 0 0 0 0 4h4v-4Z"/>
+          </svg>
+        </div>
+        <h3 class="step-title">Crie sua conta grátis</h3>
+        <p class="step-desc">Cadastro em menos de 2 minutos. Sem dados de cartão, sem compromisso.</p>
+      </div>
+
+      <div class="step-connector">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </div>
+
+      <div class="step-card">
+        <span class="step-bg-num">02</span>
+        <div class="step-num">02</div>
+        <div class="step-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1z"/>
+            <path d="M14 8H8"/><path d="M16 12H8"/><path d="M13 16H8"/>
+          </svg>
+        </div>
+        <h3 class="step-title">Registre suas finanças</h3>
+        <p class="step-desc">Adicione transações, organize por categoria e defina metas de economia.</p>
+      </div>
+
+      <div class="step-connector">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </div>
+
+      <div class="step-card">
+        <span class="step-bg-num">03</span>
+        <div class="step-num">03</div>
+        <div class="step-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+            <polyline points="17 6 23 6 23 12"/>
+          </svg>
+        </div>
+        <h3 class="step-title">Visualize e evolua</h3>
+        <p class="step-desc">Relatórios automáticos revelam sua evolução e mostram onde você pode melhorar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="testimonials" id="depoimentos">
+  <div class="testi-inner">
+    <div class="section-head">
+      <p class="section-eyebrow">Depoimentos</p>
+      <h2 class="section-title">
+        Quem usa,<br>
+        <span class="accent">aprova.</span>
+      </h2>
+      <p class="section-sub">Veja o que nossos usuários falam sobre o Electro Finance.</p>
+    </div>
+
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="testi-stars">
+          <span>★★★★★</span>
+        </div>
+        <p class="testi-quote">"Finalmente entendo para onde vai meu dinheiro. Em 3 meses, economizei R$ 1.200 que nem sabia que estava gastando. Os relatórios são incríveis."</p>
+        <div class="testi-author">
+          <span class="testi-av av-blue">RM</span>
+          <div class="testi-info">
+            <span class="testi-name">Rafael Martins</span>
+            <span class="testi-role">Engenheiro de Software</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card featured">
+        <div class="testi-stars">
+          <span>★★★★★</span>
+        </div>
+        <p class="testi-quote">"A interface é limpa e intuitiva. Uso todo dia para controlar minhas despesas e planejar metas. É o aplicativo financeiro que eu sempre quis."</p>
+        <div class="testi-author">
+          <span class="testi-av av-purple">MS</span>
+          <div class="testi-info">
+            <span class="testi-name">Marina Silva</span>
+            <span class="testi-role">Designer UX/UI</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-stars">
+          <span>★★★★★</span>
+        </div>
+        <p class="testi-quote">"Gerencio as finanças da minha empresa com muito mais precisão. Os relatórios detalhados me ajudam a tomar decisões estratégicas certeiras."</p>
+        <div class="testi-author">
+          <span class="testi-av av-green">JP</span>
+          <div class="testi-info">
+            <span class="testi-name">João Pereira</span>
+            <span class="testi-role">Empresário</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="cta-section">
   <div class="cta-inner">
     <div class="cta-card">
@@ -232,33 +426,72 @@
         <p class="cta-eyebrow">Comece hoje mesmo</p>
         <h2 class="cta-title">Pronto para transformar suas finanças?</h2>
         <p class="cta-sub">Crie sua conta gratuita em menos de 2 minutos. Sem cartão de crédito.</p>
-        <a class="cta-btn" routerLink="/auth/login">
-          Criar conta grátis
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
-        </a>
+        <div class="cta-actions">
+          <a class="cta-btn" routerLink="/auth/login">
+            Criar conta grátis
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+            <span class="btn-shimmer" aria-hidden="true"></span>
+          </a>
+          <a class="cta-btn-ghost" routerLink="/auth/login">Já tenho uma conta</a>
+        </div>
+        <p class="cta-disclaimer">Grátis para sempre no plano básico. Sem surpresas.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── Footer ─────────────────────────────────────────── -->
 <footer class="footer">
   <div class="footer-inner">
     <div class="footer-brand">
       <div class="footer-logo">
-        <span class="logo-mark sm">F</span>
-        <span class="footer-name">Finance Dashboard</span>
+        <span class="logo-mark sm">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <rect x="2" y="4"  width="20" height="3.5" rx="1.75" fill="url(#lg-foot)"/>
+            <rect x="2" y="10" width="14" height="3.5" rx="1.75" fill="url(#lg-foot)"/>
+            <rect x="2" y="16" width="8"  height="3.5" rx="1.75" fill="url(#lg-foot)"/>
+            <defs>
+              <linearGradient id="lg-foot" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#10b981"/>
+                <stop offset="100%" stop-color="#6ee7b7"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </span>
+        <span class="footer-wordmark"><span class="brand-electro">Electro</span><span class="brand-finance"> Finance</span></span>
       </div>
-      <p class="footer-tagline">Controle financeiro inteligente para o dia a dia.</p>
+      <p class="footer-tagline">Controle financeiro inteligente para o dia a dia. Simples, seguro e poderoso.</p>
     </div>
-    <div class="footer-links">
-      <a routerLink="/auth/login">Entrar</a>
-      <a routerLink="/auth/login">Criar conta</a>
+
+    <div class="footer-col">
+      <h4 class="footer-col-title">Produto</h4>
+      <a href="#funcionalidades" class="footer-link" (click)="scrollTo($event, 'funcionalidades')">Funcionalidades</a>
+      <a href="#como-funciona"  class="footer-link" (click)="scrollTo($event, 'como-funciona')">Como funciona</a>
+      <a href="#depoimentos"    class="footer-link" (click)="scrollTo($event, 'depoimentos')">Depoimentos</a>
+      <a routerLink="/auth/login" class="footer-link">Criar conta</a>
+    </div>
+
+    <div class="footer-col">
+      <h4 class="footer-col-title">Recursos</h4>
+      <a routerLink="/auth/login" class="footer-link">Transações</a>
+      <a routerLink="/auth/login" class="footer-link">Relatórios</a>
+      <a routerLink="/auth/login" class="footer-link">Metas</a>
+      <a routerLink="/auth/login" class="footer-link">Segurança</a>
+    </div>
+
+    <div class="footer-col">
+      <h4 class="footer-col-title">Suporte</h4>
+      <a routerLink="/auth/login" class="footer-link">Acessar plataforma</a>
+      <a routerLink="/auth/login" class="footer-link">Criar nova conta</a>
+      <a routerLink="/auth/forgot-password" class="footer-link">Esqueci a senha</a>
     </div>
   </div>
   <div class="footer-bottom">
-    <span>© 2026 Finance Dashboard. Todos os direitos reservados.</span>
+    <span>© 2026 Electro Finance. Todos os direitos reservados.</span>
+    <div class="footer-bottom-links">
+      <a href="#">Termos de uso</a>
+      <a href="#">Política de privacidade</a>
+    </div>
   </div>
 </footer>
