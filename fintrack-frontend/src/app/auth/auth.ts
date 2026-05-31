@@ -6,12 +6,13 @@ import { environment } from '../environments/environments';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { PageLoader } from '../shared/page-loader';
 
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.html',
   styleUrl: './auth.scss',
-  imports: [ToastModule, CommonModule, RouterLink],
+  imports: [ToastModule, CommonModule, RouterLink, PageLoader],
   providers: [MessageService],
   animations: [
     trigger('modeSwitch', [
@@ -27,6 +28,7 @@ export class Auth {
   private readonly http = inject(HttpClient);
 
   isRegisterMode = false;
+  isLoading = false;
 
   toggleMode() {
     this.isRegisterMode = !this.isRegisterMode;
@@ -67,8 +69,10 @@ export class Auth {
 
     const endpoint = isRegister ? '/auth/register' : '/auth/login';
 
+    this.isLoading = true;
     this.http.post(`${environment.urlLocal}${endpoint}`, body).subscribe({
       next: (response: any) => {
+        this.isLoading = false;
         this.messageService.add({
           severity: 'success',
           summary: 'Sucesso',
@@ -76,10 +80,11 @@ export class Auth {
         });
       },
       error: (error) => {
+        this.isLoading = false;
         this.messageService.add({
           severity: 'error',
           summary: 'Erro',
-          detail: error.error?.message || 'Erro inesperado'
+          detail: error.error?.message || 'Erro inesperado, tente novamente mais tarde.'
         });
       }
     });
