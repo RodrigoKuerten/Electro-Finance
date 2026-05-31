@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { environment } from '../environments/environments';
@@ -9,7 +9,7 @@ import { environment } from '../environments/environments';
   selector: 'app-reset-password',
   templateUrl: './reset-password.html',
   styleUrl: './reset-password.scss',
-  imports: [ToastModule],
+  imports: [ToastModule, RouterLink],
   providers: [MessageService],
 })
 export class ResetPassword implements OnInit {

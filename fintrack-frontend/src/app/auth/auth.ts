@@ -4,13 +4,14 @@ import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { environment } from '../environments/environments';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.html',
   styleUrl: './auth.scss',
-  imports: [ToastModule, CommonModule],
+  imports: [ToastModule, CommonModule, RouterLink],
   providers: [MessageService],
   animations: [
     trigger('modeSwitch', [

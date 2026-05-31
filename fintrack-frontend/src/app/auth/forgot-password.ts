@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { environment } from '../environments/environments';
@@ -9,7 +9,7 @@ import { environment } from '../environments/environments';
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.html',
   styleUrl: './forgot-password.scss',
-  imports: [ToastModule],
+  imports: [ToastModule, RouterLink],
   providers: [MessageService],
 })
 export class ForgotPassword {
