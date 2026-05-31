@@ -2688,3 +2688,134 @@ $max-w:         1160px;
   display: inline-block;
 }
 
+
+@media (max-width: 560px) {
+  .hero {
+    min-height: 100dvh;
+    padding-top: 80px;
+  }
+
+  .hero-inner {
+    padding: 52px 20px 44px;
+    gap: 36px;
+  }
+
+  .hero-title {
+    font-size: clamp(1.9rem, 8.5vw, 2.8rem);
+    margin-bottom: 16px;
+  }
+
+  .hero-sub {
+    font-size: 0.96rem;
+    margin-bottom: 14px;
+  }
+
+  .hero-badge {
+    font-size: 0.72rem;
+    padding: 5px 12px;
+    margin-bottom: 20px;
+  }
+
+  .hero-ctas {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .cta-primary,
+  .cta-ghost {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .hero-module-tags {
+    justify-content: center;
+    margin-bottom: 24px;
+  }
+
+  .hero-visual {
+    overflow: hidden;
+  }
+
+  .mockup-mini {
+    display: none;
+  }
+
+  .mockup-card {
+    padding: 16px;
+  }
+
+  .bal-value {
+    font-size: 1.45rem;
+  }
+
+  .navbar {
+    width: calc(100% - 24px);
+    top: 10px;
+    border-radius: 12px;
+  }
+
+  .nav-inner {
+    padding: 0 14px;
+    height: 50px;
+  }
+
+  .brand-electro,
+  .brand-finance {
+    font-size: 0.85rem;
+  }
+
+  .nav-primary {
+    padding: 7px 14px;
+    font-size: 0.82rem;
+  }
+
+  .stats-inner {
+    padding: 24px 20px;
+  }
+
+  .stat-num {
+    font-size: 2.1rem;
+  }
+
+  .features-inner,
+  .how-inner,
+  .testi-inner,
+  .cta-inner,
+  .footer-bottom {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .cta-card {
+    padding: 36px 20px;
+  }
+
+  .footer-inner {
+    padding: 28px 20px 20px;
+  }
+}
+
+@media (max-width: 380px) {
+  .hero-inner {
+    padding: 46px 16px 40px;
+  }
+
+  .hero-title {
+    font-size: clamp(1.7rem, 9vw, 2.2rem);
+  }
+
+  .mockup-card {
+    padding: 14px;
+  }
+
+  .bal-value {
+    font-size: 1.3rem;
+  }
+
+  .chart-bars {
+    height: 52px;
+  }
+}
+
