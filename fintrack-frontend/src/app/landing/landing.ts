@@ -31,7 +31,10 @@ export class Landing implements AfterViewInit, OnDestroy {
     video.muted = true;
     video.play().catch(() => {});
 
-    this.initGsapAnimations();
+    requestAnimationFrame(() => {
+      this.initGsapAnimations();
+      ScrollTrigger.refresh();
+    });
     this.initCursorSpotlight();
     this.initCardBorderGlow();
   }
