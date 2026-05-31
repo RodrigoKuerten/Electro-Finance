@@ -1,3 +1,5 @@
+<div #cursorSpotlight class="cursor-spotlight" aria-hidden="true"></div>
+
 <nav class="navbar">
   <div class="nav-inner">
     <a class="nav-brand" routerLink="/">
@@ -20,12 +22,12 @@
     </a>
     <nav class="nav-links">
       <a class="nav-link" href="#como-funciona"   (click)="scrollTo($event, 'como-funciona')">Como funciona</a>
-      <a class="nav-link" href="#funcionalidades"  (click)="scrollTo($event, 'funcionalidades')">Funcionalidades</a>
-      <a class="nav-link" href="#depoimentos"      (click)="scrollTo($event, 'depoimentos')">Depoimentos</a>
+      <a class="nav-link" href="#funcionalidades"  (click)="scrollTo($event, 'funcionalidades')">Módulos</a>
+      <a class="nav-link" href="#depoimentos"      (click)="scrollTo($event, 'depoimentos')">Clientes</a>
     </nav>
     <div class="nav-actions">
       <a class="nav-ghost" routerLink="/auth/login">Entrar</a>
-      <a class="nav-primary" routerLink="/auth/login">Começar grátis</a>
+      <a class="nav-primary" routerLink="/auth/login">Agendar demo</a>
     </div>
   </div>
 </nav>
@@ -50,37 +52,52 @@
     <div class="hero-text">
       <div class="hero-badge">
         <span class="badge-dot"></span>
-        Gestão financeira inteligente
+        ERP completo para empresas
       </div>
 
       <h1 class="hero-title">
-        Tome controle<br>
-        total das suas<br>
-        <em class="accent">finanças.</em>
+        Gestão empresarial<br>
+        integrada, do financeiro<br>
+        ao <em class="accent">estoque.</em>
       </h1>
 
       <p class="hero-sub">
-        Monitore gastos, acompanhe receitas e visualize sua saúde financeira com precisão — tudo em um único lugar.
+        Financeiro, Estoque, Vendas e Compras em uma única plataforma. Dados em tempo real para decisões estratégicas.
       </p>
+
+      <div class="hero-module-tags">
+        <span class="hmt-item">Financeiro</span>
+        <span class="hmt-dot">·</span>
+        <span class="hmt-item">Estoque</span>
+        <span class="hmt-dot">·</span>
+        <span class="hmt-item">Vendas</span>
+        <span class="hmt-dot">·</span>
+        <span class="hmt-item">Compras</span>
+        <span class="hmt-dot">·</span>
+        <span class="hmt-item">Relatórios</span>
+      </div>
 
       <div class="hero-ctas">
         <a class="cta-primary" routerLink="/auth/login">
-          Começar gratuitamente
+          Agendar demonstração
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M5 12h14M12 5l7 7-7 7"/>
           </svg>
           <span class="btn-shimmer" aria-hidden="true"></span>
         </a>
-        <a class="cta-ghost" routerLink="/auth/login">Já tenho conta</a>
+        <a class="cta-ghost" routerLink="/auth/login">Trial grátis 14 dias</a>
       </div>
 
       <div class="hero-trust">
         <div class="trust-avatars">
-          <span class="av av-1">R</span>
+          <span class="av av-1">C</span>
           <span class="av av-2">M</span>
           <span class="av av-3">J</span>
         </div>
-        <span class="trust-text">+10.000 usuários confiam</span>
+        <div class="trust-body">
+          <span class="trust-count">+1.200 empresas</span>
+          <span class="trust-text">já gerenciam com o Electro Finance</span>
+        </div>
       </div>
     </div>
 
@@ -91,18 +108,25 @@
           <div class="win-dots">
             <span></span><span></span><span></span>
           </div>
-          <span class="win-label">Visão Geral</span>
+          <span class="win-label">Painel Empresarial</span>
           <span class="live-badge">
             <span class="live-dot"></span>Ao vivo
           </span>
         </div>
 
+        <div class="mockup-modules">
+          <span class="mm-tab mm-tab--active">Financeiro</span>
+          <span class="mm-tab">Estoque</span>
+          <span class="mm-tab">Vendas</span>
+          <span class="mm-tab">Compras</span>
+        </div>
+
         <div class="mockup-balance">
-          <span class="bal-label">Saldo Total</span>
-          <span class="bal-value">R$ 24.891,50</span>
+          <span class="bal-label">Faturamento do Mês</span>
+          <span class="bal-value">R$ 127.450,00</span>
           <span class="bal-trend">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
-            +12,4% este mês
+            +18,3% vs mês anterior
           </span>
         </div>
 
@@ -126,38 +150,38 @@
 
         <div class="mockup-txns">
           <div class="txn">
-            <div class="txn-icon out">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
-            </div>
-            <div class="txn-info">
-              <span class="txn-name">Supermercado</span>
-              <span class="txn-date">Hoje, 14:32</span>
-            </div>
-            <span class="txn-amt out">-R$ 187,40</span>
-          </div>
-          <div class="txn">
             <div class="txn-icon in">
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
             </div>
             <div class="txn-info">
-              <span class="txn-name">Salário</span>
-              <span class="txn-date">01 Jul, 09:00</span>
+              <span class="txn-name">NF-e #4521 — Cliente A</span>
+              <span class="txn-date">Hoje, 10:14</span>
             </div>
-            <span class="txn-amt in">+R$ 8.500,00</span>
+            <span class="txn-amt in">+R$ 12.400,00</span>
+          </div>
+          <div class="txn">
+            <div class="txn-icon out">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+            </div>
+            <div class="txn-info">
+              <span class="txn-name">Pedido de Compra #208</span>
+              <span class="txn-date">Hoje, 09:30</span>
+            </div>
+            <span class="txn-amt out">-R$ 3.890,00</span>
           </div>
         </div>
       </div>
       </div>
 
       <div class="mockup-mini">
-        <span class="mini-label">Meta de economia</span>
-        <span class="mini-value">R$ 3.240</span>
+        <span class="mini-label">Estoque crítico</span>
+        <span class="mini-value">3 SKUs</span>
         <div class="mini-bar">
-          <div class="mini-fill"></div>
+          <div class="mini-fill mini-fill--alert"></div>
         </div>
         <div class="mini-footer">
-          <span class="mini-pct">68% atingido</span>
-          <span class="mini-target">Meta: R$ 4.800</span>
+          <span class="mini-pct mini-pct--alert">Abaixo do mínimo</span>
+          <span class="mini-target">Ver lista →</span>
         </div>
       </div>
     </div>
@@ -165,44 +189,28 @@
 </section>
 
 <div class="stats-bar">
+  <div class="stats-ticker-line"></div>
   <div class="stats-inner">
     <div class="stat">
-      <div class="stat-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
-          <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-        </svg>
-      </div>
-      <span class="stat-num">10k+</span>
-      <span class="stat-lbl">Usuários Ativos</span>
+      <span class="stat-category">Clientes ativos</span>
+      <span class="stat-num">1.200<span class="stat-plus">+</span></span>
+      <span class="stat-lbl">Empresas gerenciadas</span>
     </div>
     <div class="stat-divider"></div>
     <div class="stat">
-      <div class="stat-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>
-        </svg>
-      </div>
-      <span class="stat-num">R$ 2M+</span>
-      <span class="stat-lbl">Gerenciados</span>
+      <span class="stat-category">Volume processado</span>
+      <span class="stat-num">R$ 500M<span class="stat-plus">+</span></span>
+      <span class="stat-lbl">em NFs processadas</span>
     </div>
     <div class="stat-divider"></div>
     <div class="stat">
-      <div class="stat-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/>
-        </svg>
-      </div>
+      <span class="stat-category">Infraestrutura</span>
       <span class="stat-num">99,9%</span>
       <span class="stat-lbl">Uptime garantido</span>
     </div>
     <div class="stat-divider"></div>
     <div class="stat">
-      <div class="stat-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-        </svg>
-      </div>
+      <span class="stat-category">Satisfação NPS</span>
       <span class="stat-num">4,9<span class="stat-star">★</span></span>
       <span class="stat-lbl">Avaliação média</span>
     </div>
@@ -212,40 +220,134 @@
 <section class="features" id="funcionalidades">
   <div class="features-inner">
     <div class="section-head">
-      <p class="section-eyebrow">Funcionalidades</p>
+      <p class="section-eyebrow">Módulos ERP</p>
       <h2 class="section-title">
-        Tudo que você precisa,<br>
-        <span class="accent">em um só lugar.</span>
+        5 módulos integrados,<br>
+        <span class="accent">uma plataforma completa.</span>
       </h2>
-      <p class="section-sub">Ferramentas poderosas para quem leva finanças a sério.</p>
+      <p class="section-sub">Do controle financeiro ao estoque, de vendas às compras — tudo conectado e em tempo real.</p>
+    </div>
+
+    <div class="module-strip">
+      <span class="module-pill">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"/></svg>
+        Financeiro
+      </span>
+      <span class="module-pill">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/></svg>
+        Estoque
+      </span>
+      <span class="module-pill">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        Vendas
+      </span>
+      <span class="module-pill">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        Compras
+      </span>
+      <span class="module-pill">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
+        Relatórios
+      </span>
     </div>
 
     <div class="feat-grid">
+
+      <div class="feat-card feat-card--primary">
+        <div class="feat-card-body">
+          <div class="feat-module-badge">Módulo principal</div>
+          <div class="feat-icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/>
+              <path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/>
+              <path d="M18 12a2 2 0 0 0 0 4h4v-4Z"/>
+            </svg>
+          </div>
+          <h3 class="feat-title">Módulo Financeiro</h3>
+          <p class="feat-desc">Controle total de contas a pagar e receber, fluxo de caixa, DRE e balanço patrimonial com conciliação bancária automática.</p>
+          <ul class="feat-list">
+            <li>Contas a pagar e a receber</li>
+            <li>Fluxo de caixa em tempo real</li>
+            <li>DRE e balanço patrimonial</li>
+            <li>Conciliação bancária automática</li>
+          </ul>
+          <a class="feat-arrow" routerLink="/auth/login">
+            <span>Ver módulo financeiro</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+        <div class="feat-live-preview">
+          <div class="flp-header">
+            <span class="flp-title">Movimentações</span>
+            <span class="flp-live-badge"><span class="flp-live-dot"></span>Ao vivo</span>
+          </div>
+          <div class="flp-bars">
+            <div class="flp-bar" style="--h:32%"></div>
+            <div class="flp-bar" style="--h:56%"></div>
+            <div class="flp-bar flp-bar--hi" style="--h:80%"></div>
+            <div class="flp-bar" style="--h:44%"></div>
+            <div class="flp-bar flp-bar--hi" style="--h:94%"></div>
+            <div class="flp-bar" style="--h:68%"></div>
+            <div class="flp-bar" style="--h:75%"></div>
+          </div>
+          <div class="flp-months">
+            <span>Jan</span><span>Fev</span><span>Mar</span>
+            <span>Abr</span><span>Mai</span><span>Jun</span><span>Jul</span>
+          </div>
+          <div class="flp-divider"></div>
+          <div class="flp-txns">
+            <div class="flp-txn">
+              <div class="flp-icon flp-icon--in">
+                <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+              </div>
+              <span class="flp-name">NF-e #4521</span>
+              <span class="flp-amt flp-amt--in">+R$ 12.400</span>
+            </div>
+            <div class="flp-txn">
+              <div class="flp-icon flp-icon--out">
+                <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+              </div>
+              <span class="flp-name">Pedido Compra #208</span>
+              <span class="flp-amt flp-amt--out">-R$ 3.890</span>
+            </div>
+            <div class="flp-txn">
+              <div class="flp-icon flp-icon--out">
+                <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+              </div>
+              <span class="flp-name">Folha CLT — Jul</span>
+              <span class="flp-amt flp-amt--out">-R$ 28.400</span>
+            </div>
+          </div>
+        </div>
+        <div class="feat-glow"></div>
+      </div>
+
       <div class="feat-card">
+        <div class="feat-module-badge">Estoque &amp; Compras</div>
         <div class="feat-icon-wrap">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1z"/>
-            <path d="M14 8H8"/>
-            <path d="M16 12H8"/>
-            <path d="M13 16H8"/>
+            <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/>
+            <path d="m3.3 7 8.7 5 8.7-5"/>
+            <path d="M12 22V12"/>
           </svg>
         </div>
-        <h3 class="feat-title">Transações em tempo real</h3>
-        <p class="feat-desc">Registre e acompanhe cada movimentação instantaneamente. Categorização automática e histórico completo.</p>
+        <h3 class="feat-title">Gestão de Estoque</h3>
+        <p class="feat-desc">Controle de SKUs, lotes, validades e localizações. Pedidos de compra integrados ao financeiro com alertas de reposição automáticos.</p>
         <ul class="feat-list">
-          <li>Categorização automática por IA</li>
-          <li>Histórico com filtros avançados</li>
-          <li>Suporte a múltiplas categorias</li>
-          <li>Recorrências e agendamentos</li>
+          <li>Controle de SKUs e lotes</li>
+          <li>Alertas de estoque mínimo</li>
+          <li>Pedidos de compra integrados</li>
+          <li>Inventário e rastreio por código de barras</li>
         </ul>
         <a class="feat-arrow" routerLink="/auth/login">
-          <span>Começar agora</span>
+          <span>Ver módulo estoque</span>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
         <div class="feat-glow"></div>
       </div>
 
       <div class="feat-card">
+        <div class="feat-module-badge">Vendas &amp; Relatórios</div>
         <div class="feat-icon-wrap">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M3 3v18h18"/>
@@ -254,42 +356,21 @@
             <path d="M8 17v-3"/>
           </svg>
         </div>
-        <h3 class="feat-title">Relatórios detalhados</h3>
-        <p class="feat-desc">Visualize seus dados em gráficos claros. Identifique padrões e tome decisões embasadas em dados reais.</p>
+        <h3 class="feat-title">Vendas &amp; BI</h3>
+        <p class="feat-desc">Pipeline de vendas, emissão de NF-e, gestão de clientes e relatórios gerenciais com KPIs e dashboards em tempo real.</p>
         <ul class="feat-list">
-          <li>Gráficos interativos por período</li>
-          <li>Comparativo mensal e anual</li>
-          <li>Análise de gastos por categoria</li>
-          <li>Exportação em PDF e planilha</li>
+          <li>Pipeline de vendas e CRM</li>
+          <li>Emissão de NF-e integrada</li>
+          <li>Relatórios em PDF e Excel</li>
+          <li>KPIs e dashboards personalizáveis</li>
         </ul>
         <a class="feat-arrow" routerLink="/auth/login">
-          <span>Ver relatórios</span>
+          <span>Ver módulo vendas</span>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
         <div class="feat-glow"></div>
       </div>
 
-      <div class="feat-card">
-        <div class="feat-icon-wrap">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-            <path d="m9 12 2 2 4-4"/>
-          </svg>
-        </div>
-        <h3 class="feat-title">Segurança bancária</h3>
-        <p class="feat-desc">Dados protegidos com criptografia de nível bancário. Sua privacidade é inegociável.</p>
-        <ul class="feat-list">
-          <li>Criptografia AES-256 em repouso</li>
-          <li>Autenticação em dois fatores</li>
-          <li>Sessões seguras com JWT</li>
-          <li>Backup automático diário</li>
-        </ul>
-        <a class="feat-arrow" routerLink="/auth/login">
-          <span>Criar conta segura</span>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-        <div class="feat-glow"></div>
-      </div>
     </div>
   </div>
 </section>
@@ -297,18 +378,22 @@
 <section class="how-it-works" id="como-funciona">
   <div class="how-inner">
     <div class="section-head">
-      <p class="section-eyebrow">Como funciona</p>
+      <p class="section-eyebrow">Implantação rápida</p>
       <h2 class="section-title">
-        Simples de usar,<br>
-        <span class="accent">poderoso na prática.</span>
+        Do zero ao ERP completo<br>
+        <span class="accent">em menos de 30 minutos.</span>
       </h2>
-      <p class="section-sub">Em menos de 5 minutos você tem controle total das suas finanças.</p>
+      <p class="section-sub">Migre do Excel ou de sistemas legados com suporte dedicado. Sem horas de treinamento.</p>
     </div>
 
-    <div class="steps-grid">
+    <div class="steps-flow">
+      <div class="steps-spine"></div>
+
       <div class="step-card">
-        <span class="step-bg-num">01</span>
-        <div class="step-num">01</div>
+        <div class="step-index-col">
+          <div class="step-spine-dot"></div>
+          <div class="step-num">01</div>
+        </div>
         <div class="step-icon-wrap">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/>
@@ -316,46 +401,47 @@
             <path d="M18 12a2 2 0 0 0 0 4h4v-4Z"/>
           </svg>
         </div>
-        <h3 class="step-title">Crie sua conta grátis</h3>
-        <p class="step-desc">Cadastro em menos de 2 minutos. Sem dados de cartão, sem compromisso.</p>
-      </div>
-
-      <div class="step-connector">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M5 12h14M12 5l7 7-7 7"/>
-        </svg>
+        <div class="step-content">
+          <h3 class="step-title">Crie sua conta empresarial</h3>
+          <p class="step-desc">Cadastro em menos de 2 minutos. CNPJ, regime tributário e dados da empresa prontos para começar.</p>
+        </div>
+        <span class="step-bg-num">01</span>
       </div>
 
       <div class="step-card">
-        <span class="step-bg-num">02</span>
-        <div class="step-num">02</div>
+        <div class="step-index-col">
+          <div class="step-spine-dot"></div>
+          <div class="step-num">02</div>
+        </div>
         <div class="step-icon-wrap">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1z"/>
             <path d="M14 8H8"/><path d="M16 12H8"/><path d="M13 16H8"/>
           </svg>
         </div>
-        <h3 class="step-title">Registre suas finanças</h3>
-        <p class="step-desc">Adicione transações, organize por categoria e defina metas de economia.</p>
-      </div>
-
-      <div class="step-connector">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M5 12h14M12 5l7 7-7 7"/>
-        </svg>
+        <div class="step-content">
+          <h3 class="step-title">Configure seus módulos</h3>
+          <p class="step-desc">Ative Financeiro, Estoque, Vendas e Compras. Importe dados do Excel com um clique. Nossa equipe apoia a implantação.</p>
+        </div>
+        <span class="step-bg-num">02</span>
       </div>
 
       <div class="step-card">
-        <span class="step-bg-num">03</span>
-        <div class="step-num">03</div>
+        <div class="step-index-col">
+          <div class="step-spine-dot"></div>
+          <div class="step-num">03</div>
+        </div>
         <div class="step-icon-wrap">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
             <polyline points="17 6 23 6 23 12"/>
           </svg>
         </div>
-        <h3 class="step-title">Visualize e evolua</h3>
-        <p class="step-desc">Relatórios automáticos revelam sua evolução e mostram onde você pode melhorar.</p>
+        <div class="step-content">
+          <h3 class="step-title">Gerencie e cresça</h3>
+          <p class="step-desc">Dashboards em tempo real, fechamento contábil automatizado e KPIs que revelam onde sua empresa pode crescer mais.</p>
+        </div>
+        <span class="step-bg-num">03</span>
       </div>
     </div>
   </div>
@@ -364,56 +450,86 @@
 <section class="testimonials" id="depoimentos">
   <div class="testi-inner">
     <div class="section-head">
-      <p class="section-eyebrow">Depoimentos</p>
+      <p class="section-eyebrow">Clientes</p>
       <h2 class="section-title">
-        Quem usa,<br>
-        <span class="accent">aprova.</span>
+        Empresas que cresceram<br>
+        <span class="accent">com o Electro Finance.</span>
       </h2>
-      <p class="section-sub">Veja o que nossos usuários falam sobre o Electro Finance.</p>
+      <p class="section-sub">Veja como nossos clientes substituíram planilhas e sistemas legados por um ERP moderno.</p>
     </div>
 
     <div class="testi-grid">
-      <div class="testi-card">
-        <div class="testi-stars">
-          <span>★★★★★</span>
+
+      <div class="testi-card testi-card--hero featured">
+        <div class="testi-hero-left">
+          <div class="testi-bigquote">"</div>
+          <div class="testi-stars"><span>★★★★★</span></div>
+          <p class="testi-quote">"Substituímos três sistemas diferentes pelo Electro Finance. O módulo financeiro é completo, a integração com estoque é perfeita e o onboarding da equipe foi muito mais rápido do que esperávamos."</p>
+          <div class="testi-author">
+            <span class="testi-av av-purple">CA</span>
+            <div class="testi-info">
+              <span class="testi-name">Carolina Andrade</span>
+              <div class="testi-role-wrap">
+                <span class="testi-role">CFO</span>
+                <span class="testi-company">Grupo Andrade Logística</span>
+              </div>
+            </div>
+          </div>
         </div>
-        <p class="testi-quote">"Finalmente entendo para onde vai meu dinheiro. Em 3 meses, economizei R$ 1.200 que nem sabia que estava gastando. Os relatórios são incríveis."</p>
-        <div class="testi-author">
-          <span class="testi-av av-blue">RM</span>
-          <div class="testi-info">
-            <span class="testi-name">Rafael Martins</span>
-            <span class="testi-role">Engenheiro de Software</span>
+        <div class="testi-hero-right">
+          <div class="testi-data-card">
+            <div class="tdc-label">Faturamento do Mês</div>
+            <div class="tdc-value">R$ 847.200</div>
+            <div class="tdc-bar-track">
+              <div class="tdc-bar-fill"></div>
+            </div>
+            <div class="tdc-footer">
+              <span class="tdc-pct">+18% vs meta</span>
+              <span class="tdc-target">Meta: R$ 720k</span>
+            </div>
+            <div class="tdc-divider"></div>
+            <div class="tdc-row">
+              <span class="tdc-row-label">Despesas operacionais</span>
+              <span class="tdc-row-val">R$ 312.400</span>
+            </div>
+            <div class="tdc-row">
+              <span class="tdc-row-label">Margem líquida</span>
+              <span class="tdc-row-val tdc-row-val--green">32,4%</span>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="testi-card featured">
-        <div class="testi-stars">
-          <span>★★★★★</span>
-        </div>
-        <p class="testi-quote">"A interface é limpa e intuitiva. Uso todo dia para controlar minhas despesas e planejar metas. É o aplicativo financeiro que eu sempre quis."</p>
+      <div class="testi-card">
+        <div class="testi-stars"><span>★★★★★</span></div>
+        <p class="testi-quote">"O controle de estoque transformou nossa operação. Reduzimos desperdício em 34% no primeiro trimestre. Os pedidos de compra que fazíamos manualmente há 10 anos foram totalmente automatizados."</p>
         <div class="testi-author">
-          <span class="testi-av av-purple">MS</span>
+          <span class="testi-av av-blue">MF</span>
           <div class="testi-info">
-            <span class="testi-name">Marina Silva</span>
-            <span class="testi-role">Designer UX/UI</span>
+            <span class="testi-name">Marcelo Ferreira</span>
+            <div class="testi-role-wrap">
+              <span class="testi-role">Diretor de Operações</span>
+              <span class="testi-company">Distribuidora Ferreira</span>
+            </div>
           </div>
         </div>
       </div>
 
       <div class="testi-card">
-        <div class="testi-stars">
-          <span>★★★★★</span>
-        </div>
-        <p class="testi-quote">"Gerencio as finanças da minha empresa com muito mais precisão. Os relatórios detalhados me ajudam a tomar decisões estratégicas certeiras."</p>
+        <div class="testi-stars"><span>★★★★★</span></div>
+        <p class="testi-quote">"O fechamento contábil que levava 3 dias passou a ser feito em menos de 2 horas. A visão consolidada de receitas e despesas em tempo real mudou completamente nossa tomada de decisão."</p>
         <div class="testi-author">
           <span class="testi-av av-green">JP</span>
           <div class="testi-info">
-            <span class="testi-name">João Pereira</span>
-            <span class="testi-role">Empresário</span>
+            <span class="testi-name">Juliana Prado</span>
+            <div class="testi-role-wrap">
+              <span class="testi-role">Gestora Financeira</span>
+              <span class="testi-company">Consultório Prado</span>
+            </div>
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </section>
@@ -422,27 +538,78 @@
   <div class="cta-inner">
     <div class="cta-card">
       <div class="cta-orb"></div>
-      <div class="cta-content">
-        <p class="cta-eyebrow">Comece hoje mesmo</p>
-        <h2 class="cta-title">Pronto para transformar suas finanças?</h2>
-        <p class="cta-sub">Crie sua conta gratuita em menos de 2 minutos. Sem cartão de crédito.</p>
-        <div class="cta-actions">
-          <a class="cta-btn" routerLink="/auth/login">
-            Criar conta grátis
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
-            </svg>
-            <span class="btn-shimmer" aria-hidden="true"></span>
-          </a>
-          <a class="cta-btn-ghost" routerLink="/auth/login">Já tenho uma conta</a>
+      <div class="cta-orb cta-orb--2"></div>
+      <div class="cta-split">
+        <div class="cta-content">
+          <p class="cta-eyebrow">Trial gratuito por 14 dias</p>
+          <h2 class="cta-title">Seu ERP pronto<br>em menos de 30 minutos.</h2>
+          <p class="cta-sub">Migre do Excel ou de sistemas legados sem complicação. Nossa equipe cuida de toda a implantação, sem custo adicional.</p>
+          <ul class="cta-benefits">
+            <li>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Todos os módulos liberados por 14 dias
+            </li>
+            <li>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Implantação gratuita com suporte dedicado
+            </li>
+            <li>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Migração do Excel em menos de 1 hora
+            </li>
+          </ul>
+          <div class="cta-actions">
+            <a class="cta-btn" routerLink="/auth/login">
+              Agendar demonstração
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+              <span class="btn-shimmer" aria-hidden="true"></span>
+            </a>
+            <a class="cta-btn-ghost" routerLink="/auth/login">Começar trial grátis</a>
+          </div>
+          <p class="cta-disclaimer">Sem cartão de crédito. Cancele quando quiser.</p>
         </div>
-        <p class="cta-disclaimer">Grátis para sempre no plano básico. Sem surpresas.</p>
+        <div class="cta-visual">
+          <div class="cta-data-card">
+            <div class="cdc-topbar">
+              <span class="cdc-label">Painel Empresarial</span>
+              <span class="cdc-live"><span class="cdc-dot"></span>Ao vivo</span>
+            </div>
+            <div class="cdc-balance">
+              <span class="cdc-bal-label">Faturamento do Mês</span>
+              <span class="cdc-bal-value">R$ 127.450</span>
+              <span class="cdc-trend">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                +18,3% vs mês anterior
+              </span>
+            </div>
+            <div class="cdc-bars">
+              <div class="cdc-bar" style="--h:42%"></div>
+              <div class="cdc-bar" style="--h:60%"></div>
+              <div class="cdc-bar cdc-bar--hi" style="--h:76%"></div>
+              <div class="cdc-bar" style="--h:52%"></div>
+              <div class="cdc-bar cdc-bar--hi" style="--h:88%"></div>
+              <div class="cdc-bar" style="--h:68%"></div>
+            </div>
+            <div class="cdc-months">
+              <span>Jan</span><span>Fev</span><span>Mar</span>
+              <span>Abr</span><span>Mai</span><span>Jun</span>
+            </div>
+            <div class="cdc-module-tags">
+              <span>Financeiro</span>
+              <span>Estoque</span>
+              <span>Vendas</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <footer class="footer">
+  <div class="footer-glow-line"></div>
   <div class="footer-inner">
     <div class="footer-brand">
       <div class="footer-logo">
@@ -461,28 +628,32 @@
         </span>
         <span class="footer-wordmark"><span class="brand-electro">Electro</span><span class="brand-finance"> Finance</span></span>
       </div>
-      <p class="footer-tagline">Controle financeiro inteligente para o dia a dia. Simples, seguro e poderoso.</p>
+      <p class="footer-tagline">ERP empresarial completo: Financeiro, Estoque, Vendas e Compras em uma única plataforma moderna.</p>
+      <div class="footer-badge">
+        <span class="footer-badge-dot"></span>
+        Plataforma ativa · 99,9% uptime
+      </div>
     </div>
 
     <div class="footer-col">
       <h4 class="footer-col-title">Produto</h4>
-      <a href="#funcionalidades" class="footer-link" (click)="scrollTo($event, 'funcionalidades')">Funcionalidades</a>
+      <a href="#funcionalidades" class="footer-link" (click)="scrollTo($event, 'funcionalidades')">Módulos ERP</a>
       <a href="#como-funciona"  class="footer-link" (click)="scrollTo($event, 'como-funciona')">Como funciona</a>
-      <a href="#depoimentos"    class="footer-link" (click)="scrollTo($event, 'depoimentos')">Depoimentos</a>
-      <a routerLink="/auth/login" class="footer-link">Criar conta</a>
+      <a href="#depoimentos"    class="footer-link" (click)="scrollTo($event, 'depoimentos')">Clientes</a>
+      <a routerLink="/auth/login" class="footer-link">Agendar demo</a>
     </div>
 
     <div class="footer-col">
-      <h4 class="footer-col-title">Recursos</h4>
-      <a routerLink="/auth/login" class="footer-link">Transações</a>
-      <a routerLink="/auth/login" class="footer-link">Relatórios</a>
-      <a routerLink="/auth/login" class="footer-link">Metas</a>
-      <a routerLink="/auth/login" class="footer-link">Segurança</a>
+      <h4 class="footer-col-title">Módulos</h4>
+      <a routerLink="/auth/login" class="footer-link">Financeiro</a>
+      <a routerLink="/auth/login" class="footer-link">Estoque &amp; Compras</a>
+      <a routerLink="/auth/login" class="footer-link">Vendas &amp; CRM</a>
+      <a routerLink="/auth/login" class="footer-link">Relatórios &amp; BI</a>
     </div>
 
     <div class="footer-col">
-      <h4 class="footer-col-title">Suporte</h4>
-      <a routerLink="/auth/login" class="footer-link">Acessar plataforma</a>
+      <h4 class="footer-col-title">Acesso</h4>
+      <a routerLink="/auth/login" class="footer-link">Entrar na plataforma</a>
       <a routerLink="/auth/login" class="footer-link">Criar nova conta</a>
       <a routerLink="/auth/forgot-password" class="footer-link">Esqueci a senha</a>
     </div>
