@@ -1,195 +1,141 @@
 <p-toast></p-toast>
+<app-page-loader [visible]="isLoading" [label]="isRegisterMode ? 'Criando conta...' : 'Entrando...'"></app-page-loader>
 
-<div class="auth-layout">
+<div class="auth-shell">
+  <div class="auth-top-line" aria-hidden="true"></div>
 
-  <aside class="brand-panel">
-    <div class="bp-orb bp-orb--1"></div>
-    <div class="bp-orb bp-orb--2"></div>
-    <div class="bp-grid"></div>
+  <video
+    class="auth-bg-video"
+    src="https://stream.mux.com/Kec29dVyJgiPdtWaQtPuEiiGHkJIYQAVUJcNiIHUYeo.m3u8"
+    [muted]="true"
+    playsinline
+    autoplay
+    loop
+    aria-hidden="true"
+  ></video>
+  <div class="auth-video-overlay"></div>
 
-    <div class="bp-inner">
+  <div class="as-orb as-orb--1"></div>
+  <div class="as-orb as-orb--2"></div>
+  <div class="as-orb as-orb--3"></div>
+  <div class="as-grid"></div>
+  <div class="as-noise"></div>
 
-      <div class="bp-logo">
-        <span class="logo-mark">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-            <rect x="2" y="4"  width="20" height="3.5" rx="1.75" fill="url(#lg-auth)"/>
-            <rect x="2" y="10" width="14" height="3.5" rx="1.75" fill="url(#lg-auth)"/>
-            <rect x="2" y="16" width="8"  height="3.5" rx="1.75" fill="url(#lg-auth)"/>
-            <defs>
-              <linearGradient id="lg-auth" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0%" stop-color="#10b981"/>
-                <stop offset="100%" stop-color="#6ee7b7"/>
-              </linearGradient>
-            </defs>
-          </svg>
-        </span>
-        <div class="logo-wordmark">
-          <span class="brand-electro">Electro</span><span class="brand-finance"> Finance</span>
-        </div>
-      </div>
+  <a routerLink="/" class="as-back">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M19 12H5M5 12l7 7M5 12l7-7"/>
+    </svg>
+    Início
+  </a>
 
-      <div class="bp-headline-block">
-        <p class="bp-eyebrow">Gestão financeira inteligente</p>
-        <h2 class="bp-headline">
-          Seu dinheiro,<br>sob <em>controle.</em>
-        </h2>
-        <p class="bp-sub">Monitore transações, visualize relatórios e tome decisões com clareza.</p>
-      </div>
+  <div class="card-glow-ring" aria-hidden="true"></div>
 
-      <div class="preview-card">
-        <div class="pc-header">
-          <span class="pc-header-title">Visão Geral</span>
-          <span class="pc-live-badge"><span class="pc-live-dot"></span>Ao vivo</span>
-        </div>
+  <div class="auth-card">
 
-        <div class="pc-balance">
-          <div class="pc-bal-label">Patrimônio total</div>
-          <div class="pc-bal-value">R$ 47.230<span class="pc-bal-cents">,00</span></div>
-          <div class="pc-bal-trend">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
-              <polyline points="17 6 23 6 23 12"/>
-            </svg>
-            +8,2% este mês
-          </div>
-        </div>
-
-        <div class="pc-chart">
-          <div class="pc-bars">
-            <div class="pc-bar" style="--h:38%"></div>
-            <div class="pc-bar" style="--h:55%"></div>
-            <div class="pc-bar pc-bar--hi" style="--h:72%"></div>
-            <div class="pc-bar" style="--h:48%"></div>
-            <div class="pc-bar pc-bar--hi" style="--h:86%"></div>
-            <div class="pc-bar" style="--h:64%"></div>
-            <div class="pc-bar pc-bar--hi" style="--h:92%"></div>
-          </div>
-          <div class="pc-months">
-            <span>Jan</span><span>Fev</span><span>Mar</span>
-            <span>Abr</span><span>Mai</span><span>Jun</span><span>Jul</span>
-          </div>
-        </div>
-
-        <div class="pc-divider"></div>
-
-        <div class="pc-stats">
-          <div class="pc-stat">
-            <span class="pc-stat-lbl">Receita</span>
-            <span class="pc-stat-val">R$ 8.500</span>
-          </div>
-          <div class="pc-stat-sep"></div>
-          <div class="pc-stat">
-            <span class="pc-stat-lbl">Gastos</span>
-            <span class="pc-stat-val pc-stat-val--red">−R$ 3.240</span>
-          </div>
-          <div class="pc-stat-sep"></div>
-          <div class="pc-stat">
-            <span class="pc-stat-lbl">Economias</span>
-            <span class="pc-stat-val pc-stat-val--grn">+R$ 1.260</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="bp-proof">
-        <div class="bp-avatars">
-          <span class="bpa bpa-1">R</span>
-          <span class="bpa bpa-2">M</span>
-          <span class="bpa bpa-3">J</span>
-        </div>
-        <span class="bp-proof-text">+10.000 usuários ativos no Electro Finance</span>
-      </div>
-
-    </div>
-  </aside>
-
-  <main class="form-panel">
-    <div class="form-card">
-      <a routerLink="/" class="back-home">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M19 12H5M5 12l7 7M5 12l7-7"/>
+    <div class="ac-logo">
+      <span class="ac-logo-mark">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <rect x="2" y="4"  width="20" height="3.5" rx="1.75" fill="url(#lg-card)"/>
+          <rect x="2" y="10" width="14" height="3.5" rx="1.75" fill="url(#lg-card)"/>
+          <rect x="2" y="16" width="8"  height="3.5" rx="1.75" fill="url(#lg-card)"/>
+          <defs>
+            <linearGradient id="lg-card" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#10b981"/>
+              <stop offset="100%" stop-color="#6ee7b7"/>
+            </linearGradient>
+          </defs>
         </svg>
-        Página inicial
-      </a>
+      </span>
+      <div class="ac-brand-text">
+        <span class="brand-electro">Electro</span><span class="brand-finance"> Finance</span>
+      </div>
+    </div>
 
-      <div class="form-header" [@modeSwitch]="isRegisterMode">
-        <p class="form-eyebrow">{{ isRegisterMode ? 'Novo usuário' : 'Bem-vindo de volta' }}</p>
-        <h1 class="form-title">{{ isRegisterMode ? 'Criar conta' : 'Entrar' }}</h1>
-        <p class="form-subtitle">
-          {{ isRegisterMode ? 'Preencha seus dados para começar' : 'Acesse sua conta financeira' }}
-        </p>
+    <div class="ac-erp-badge">
+      <span class="aeb-pulse"></span>
+      ERP — Financeiro &middot; Estoque &middot; Vendas &middot; Compras
+    </div>
+
+    <div class="ac-header" [@modeSwitch]="isRegisterMode">
+      <h1 class="ac-title">{{ isRegisterMode ? 'Criar conta' : 'Entrar' }}</h1>
+      <p class="ac-subtitle">
+        {{ isRegisterMode ? 'Preencha seus dados para acessar o ERP' : 'Acesse sua plataforma empresarial' }}
+      </p>
+    </div>
+
+    <form (submit)="$event.preventDefault()">
+      <div class="input-group" style="--ig: 0">
+        <label class="input-label" for="email">E-mail corporativo</label>
+        <input
+          #emailInput
+          class="input-field"
+          id="email"
+          name="email"
+          type="email"
+          autocomplete="email"
+          placeholder="voce@empresa.com"
+        />
       </div>
 
-      <form (submit)="$event.preventDefault()">
-        <div class="input-group" style="--ig: 0">
-          <label class="input-label" for="email">E-mail</label>
-          <input
-            #emailInput
-            class="input-field"
-            id="email"
-            name="email"
-            type="email"
-            autocomplete="email"
-            placeholder="seu@email.com"
-          />
+      <div class="input-group" style="--ig: 1">
+        <label class="input-label" for="password">Senha</label>
+        <input
+          #passwordInput
+          class="input-field"
+          id="password"
+          name="password"
+          type="password"
+          autocomplete="current-password"
+          placeholder="••••••••"
+        />
+      </div>
+
+      <a *ngIf="!isRegisterMode" routerLink="/auth/forgot-password" class="forgot-btn">Esqueci minha senha</a>
+
+      <div class="register-fields" [class.visible]="isRegisterMode">
+        <div class="form-divider"></div>
+
+        <div class="input-group">
+          <label class="input-label">Nome completo</label>
+          <input #fullNameInput class="input-field" type="text" placeholder="Seu nome completo" />
         </div>
 
-        <div class="input-group" style="--ig: 1">
-          <label class="input-label" for="password">Senha</label>
-          <input
-            #passwordInput
-            class="input-field"
-            id="password"
-            name="password"
-            type="password"
-            autocomplete="current-password"
-            placeholder="••••••••"
-          />
+        <div class="input-group">
+          <label class="input-label">Empresa</label>
+          <input #addressInput class="input-field" type="text" placeholder="Nome da empresa" />
         </div>
 
-        <a *ngIf="!isRegisterMode" routerLink="/auth/forgot-password" class="forgot-btn">Esqueci minha senha</a>
-
-        <div class="register-fields" [class.visible]="isRegisterMode">
-          <div class="form-divider"></div>
-
-          <div class="input-group">
-            <label class="input-label">Nome completo</label>
-            <input #fullNameInput class="input-field" type="text" placeholder="Seu nome completo" />
-          </div>
-
-          <div class="input-group">
-            <label class="input-label">Endereço</label>
-            <input #addressInput class="input-field" type="text" placeholder="Rua, número, bairro" />
-          </div>
-
-          <div class="input-group">
-            <label class="input-label">Telefone</label>
-            <input #phoneNumberInput class="input-field" type="tel" placeholder="(00) 00000-0000" />
-          </div>
+        <div class="input-group">
+          <label class="input-label">Telefone</label>
+          <input #phoneNumberInput class="input-field" type="tel" placeholder="(00) 00000-0000" />
         </div>
+      </div>
 
-        <div class="form-divider animate-divider"></div>
+      <div class="form-divider animate-divider"></div>
 
-        <button
-          type="button"
-          class="btn-primary"
-          (click)="submitAuth(
-            emailInput.value,
-            passwordInput.value,
-            isRegisterMode,
-            isRegisterMode ? fullNameInput.value : undefined,
-            isRegisterMode ? addressInput.value : undefined,
-            isRegisterMode ? phoneNumberInput.value : undefined
-          )"
-        >
-          <span class="btn-text">{{ isRegisterMode ? 'Criar conta' : 'Entrar na plataforma' }}</span>
-          <span class="btn-shimmer"></span>
-        </button>
+      <button
+        type="button"
+        class="btn-primary"
+        [disabled]="isLoading"
+        (click)="submitAuth(
+          emailInput.value,
+          passwordInput.value,
+          isRegisterMode,
+          isRegisterMode ? fullNameInput.value : undefined,
+          isRegisterMode ? addressInput.value : undefined,
+          isRegisterMode ? phoneNumberInput.value : undefined
+        )"
+      >
+        <span class="btn-text">{{ isRegisterMode ? 'Criar conta' : 'Entrar na plataforma' }}</span>
+        <span class="btn-shimmer"></span>
+      </button>
 
-        <button type="button" class="btn-secondary" (click)="toggleMode()">
-          {{ isRegisterMode ? 'Já tenho uma conta' : 'Criar nova conta' }}
-        </button>
-      </form>
-    </div>
-  </main>
+      <button type="button" class="btn-secondary" (click)="toggleMode()">
+        {{ isRegisterMode ? 'Já tenho uma conta' : 'Criar conta gratuita' }}
+      </button>
+    </form>
 
+    <p class="ac-legal">Ao continuar você concorda com os <a href="#">Termos de Uso</a> e <a href="#">Privacidade</a>.</p>
+
+  </div>
 </div>
