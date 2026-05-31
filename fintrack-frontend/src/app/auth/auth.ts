@@ -1,7 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { MessageService } from 'primeng/api';
-import { ToastModule } from 'primeng/toast';
+import { NotificationService } from '../shared/notification.service';
 import { environment } from '../environments/environments';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
@@ -12,8 +11,7 @@ import { PageLoader } from '../shared/page-loader';
   selector: 'app-auth',
   templateUrl: './auth.html',
   styleUrl: './auth.scss',
-  imports: [ToastModule, CommonModule, RouterLink, PageLoader],
-  providers: [MessageService],
+  imports: [CommonModule, RouterLink, PageLoader],
   animations: [
     trigger('modeSwitch', [
       transition('* => *', [
@@ -24,11 +22,11 @@ import { PageLoader } from '../shared/page-loader';
   ]
 })
 export class Auth {
-  private readonly messageService = inject(MessageService);
+  private readonly notif = inject(NotificationService);
   private readonly http = inject(HttpClient);
 
   isRegisterMode = false;
-  isLoading = false;
+  isLoading = signal(false);
 
   toggleMode() {
     this.isRegisterMode = !this.isRegisterMode;
@@ -36,58 +34,36 @@ export class Auth {
 
   submitAuth(email: string, password: string, isRegister: boolean, fullName?: string, address?: string, phoneNumber?: string): void {
     if (!email || !password) {
-      this.messageService.add({
-        severity: 'warn',
-        summary: 'Campos obrigatórios',
-        detail: 'Email e senha são obrigatórios.'
-      });
+      this.notif.add({ severity: 'warn', summary: 'Campos obrigatórios', detail: 'Email e senha são obrigatórios.' });
       return;
     }
     if (!email.includes('@') || !email.includes('.')) {
-      this.messageService.add({
-        severity: 'warn',
-        summary: 'Email inválido',
-        detail: 'O email deve ser valido.'
-      });
+      this.notif.add({ severity: 'warn', summary: 'Email inválido', detail: 'O email deve ser valido.' });
       return;
     }
 
-    let body: any = {email, password};
+    let body: any = { email, password };
 
     if (isRegister) {
       if (!fullName || !address || !phoneNumber) {
-        this.messageService.add({
-          severity: 'warn',
-          summary: 'Campos obrigatórios',
-          detail: 'Preencha todos os dados para cadastro.'
-        });
+        this.notif.add({ severity: 'warn', summary: 'Campos obrigatórios', detail: 'Preencha todos os dados para cadastro.' });
         return;
       }
-
-      body = {email, password, fullName, address, phoneNumber};
+      body = { email, password, fullName, address, phoneNumber };
     }
 
     const endpoint = isRegister ? '/auth/register' : '/auth/login';
 
-    this.isLoading = true;
+    this.isLoading.set(true);
     this.http.post(`${environment.urlLocal}${endpoint}`, body).subscribe({
       next: (response: any) => {
-        this.isLoading = false;
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Sucesso',
-          detail: response.message
-        });
+        this.isLoading.set(false);
+        this.notif.add({ severity: 'success', summary: 'Sucesso', detail: response.message });
       },
       error: (error) => {
-        this.isLoading = false;
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Erro',
-          detail: error.error?.message || 'Erro inesperado, tente novamente mais tarde.'
-        });
+        this.isLoading.set(false);
+        this.notif.add({ severity: 'error', summary: 'Erro', detail: error.error?.message || 'Erro inesperado, tente novamente mais tarde.' });
       }
     });
   }
-
 }

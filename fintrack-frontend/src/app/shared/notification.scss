@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap');
+
+@keyframes notifIn {
+  from { opacity: 0; transform: translateX(28px) scale(0.97); }
+  to   { opacity: 1; transform: translateX(0) scale(1); }
+}
+
+@keyframes notifOut {
+  from { opacity: 1; transform: translateX(0) scale(1); max-height: 120px; margin-bottom: 0; }
+  to   { opacity: 0; transform: translateX(28px) scale(0.97); max-height: 0; margin-bottom: -10px; }
+}
+
+@keyframes notifProgress {
+  from { width: 100%; }
+  to   { width: 0; }
+}
+
+.notif-stack {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 368px;
+  pointer-events: none;
+}
+
+.notif-item {
+  pointer-events: all;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 14px 20px 16px;
+  background: rgba(12, 12, 12, 0.97);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-left: 3px solid var(--nc);
+  border-radius: 12px;
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  box-shadow:
+    0 8px 40px rgba(0, 0, 0, 0.6),
+    0 1px 0 rgba(255, 255, 255, 0.055) inset,
+    0 0 28px rgba(var(--nc-rgb), 0.07);
+  animation: notifIn 0.34s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  overflow: hidden;
+
+  &.notif--removing {
+    animation: notifOut 0.34s cubic-bezier(0.4, 0, 0.2, 1) both;
+    pointer-events: none;
+  }
+
+  &.notif--success { --nc: #10b981; --nc-rgb: 16, 185, 129; }
+  &.notif--error   { --nc: #ef4444; --nc-rgb: 239, 68, 68; }
+  &.notif--warn    { --nc: #f97316; --nc-rgb: 249, 115, 22; }
+  &.notif--info    { --nc: #3b82f6; --nc-rgb: 59, 130, 246; }
+}
+
+.notif-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(var(--nc-rgb), 0.1);
+  border: 1px solid rgba(var(--nc-rgb), 0.22);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  color: var(--nc);
+  margin-top: 1px;
+}
+
+.notif-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+  padding-top: 1px;
+}
+
+.notif-summary {
+  display: block;
+  font-family: 'Syne', sans-serif;
+  font-size: 0.83rem;
+  font-weight: 700;
+  color: #eef2f7;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+
+.notif-detail {
+  display: block;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.78rem;
+  color: #8892a4;
+  line-height: 1.5;
+}
+
+.notif-close {
+  background: none;
+  border: none;
+  padding: 3px;
+  color: #8892a4;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  border-radius: 5px;
+  flex-shrink: 0;
+  opacity: 0.55;
+  transition: opacity 0.2s, color 0.2s, background 0.2s;
+  margin-top: 1px;
+  line-height: 1;
+
+  &:hover {
+    opacity: 1;
+    color: #eef2f7;
+    background: rgba(255, 255, 255, 0.07);
+  }
+}
+
+.notif-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  border-radius: 0 1px 1px 0;
+  background: var(--nc);
+  opacity: 0.45;
+  width: 100%;
+  animation: notifProgress linear both;
+  animation-timing-function: linear;
+  transform-origin: left;
+}
+
+@media (max-width: 440px) {
+  .notif-stack {
+    top: 16px;
+    right: 12px;
+    left: 12px;
+    width: auto;
+  }
+}
