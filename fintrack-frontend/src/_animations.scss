@@ -1,0 +1,96 @@
+/* ════════════════════════════════════════════
+   Shared animation keyframes & utility classes
+   @use './animations' in any component SCSS,
+   or just reference keyframe names directly —
+   they're global once imported in styles.scss.
+   ════════════════════════════════════════════ */
+
+/* ── Keyframes ───────────────────────────── */
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.88); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-18px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInUp {
+  from { opacity: 0; transform: translateY(20px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0)    scale(1); }
+}
+
+@keyframes shimmer {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(100%); }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes barGrow {
+  from { width: 0 !important; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-5px); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0   0   rgba(0, 200, 150, 0); }
+  50%       { box-shadow: 0 0 14px 3px rgba(0, 200, 150, 0.18); }
+}
+
+@keyframes pulseGlowAmber {
+  0%, 100% { box-shadow: 0 0 0   0   rgba(255, 180, 0, 0); }
+  50%       { box-shadow: 0 0 14px 3px rgba(255, 180, 0, 0.18); }
+}
+
+/* Modal-specific aliases */
+@keyframes overlayIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: translateY(20px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0)    scale(1); }
+}
+
+/* ── Utility classes ─────────────────────── */
+
+/* Entry animations — add directly to element */
+.anim-fade-up    { animation: fadeSlideUp  0.45s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.anim-fade-in    { animation: fadeIn       0.35s ease both; }
+.anim-scale-in   { animation: scaleIn      0.5s  cubic-bezier(0.22, 1, 0.36, 1) both; }
+.anim-slide-left { animation: slideInLeft  0.4s  cubic-bezier(0.22, 1, 0.36, 1) both; }
+.anim-slide-up   { animation: slideInUp    0.45s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+/* Stagger delays — combine with any anim-* class */
+.anim-d1 { animation-delay: 0.07s; }
+.anim-d2 { animation-delay: 0.14s; }
+.anim-d3 { animation-delay: 0.21s; }
+.anim-d4 { animation-delay: 0.28s; }
+.anim-d5 { animation-delay: 0.35s; }
+.anim-d6 { animation-delay: 0.42s; }
+.anim-d7 { animation-delay: 0.49s; }
+.anim-d8 { animation-delay: 0.56s; }

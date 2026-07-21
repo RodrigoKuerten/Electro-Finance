@@ -1,11 +1,10 @@
 import { Component, inject, signal } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Router, RouterLink } from '@angular/router';
 import { NotificationService } from '../shared/notification.service';
-import { environment } from '../environments/environments';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { PageLoader } from '../shared/page-loader';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-auth',
@@ -23,7 +22,8 @@ import { PageLoader } from '../shared/page-loader';
 })
 export class Auth {
   private readonly notif = inject(NotificationService);
-  private readonly http = inject(HttpClient);
+  private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
 
   isRegisterMode = false;
   isLoading = signal(false);
@@ -42,23 +42,31 @@ export class Auth {
       return;
     }
 
-    let body: any = { email, password };
-
     if (isRegister) {
       if (!fullName || !address || !phoneNumber) {
         this.notif.add({ severity: 'warn', summary: 'Campos obrigatórios', detail: 'Preencha todos os dados para cadastro.' });
         return;
       }
-      body = { email, password, fullName, address, phoneNumber };
+      this.isLoading.set(true);
+      this.authService.register({ email, password, fullName, address, phoneNumber }).subscribe({
+        next: (response) => {
+          this.isLoading.set(false);
+          this.notif.add({ severity: 'success', summary: 'Sucesso', detail: response.message });
+        },
+        error: (error) => {
+          this.isLoading.set(false);
+          this.notif.add({ severity: 'error', summary: 'Erro', detail: error.error?.message || 'Erro inesperado, tente novamente mais tarde.' });
+        }
+      });
+      return;
     }
 
-    const endpoint = isRegister ? '/auth/register' : '/auth/login';
-
     this.isLoading.set(true);
-    this.http.post(`${environment.urlLocal}${endpoint}`, body).subscribe({
-      next: (response: any) => {
+    this.authService.login(email, password).subscribe({
+      next: (response) => {
         this.isLoading.set(false);
-        this.notif.add({ severity: 'success', summary: 'Sucesso', detail: response.message });
+        localStorage.setItem('auth_token', response.token ?? 'logged_in');
+        this.router.navigate(['/dashboard/hr/employees']);
       },
       error: (error) => {
         this.isLoading.set(false);

@@ -1,0 +1,97 @@
+<div class="page">
+  <!-- Header -->
+  <header class="page-header">
+    <div>
+      <h1 class="page-title">Painel RH</h1>
+      <p class="page-date">{{ currentDate }}</p>
+    </div>
+    <a class="btn-outline" routerLink="/dashboard/hr/employees">
+      <span class="material-icons">people</span>
+      Ver Funcionários
+    </a>
+  </header>
+
+  @if (loading) {
+    <div class="loading-wrap">
+      <div class="spinner"></div>
+      <span>Carregando dados...</span>
+    </div>
+  } @else {
+    <!-- KPI Cards -->
+    <div class="kpi-grid">
+      @for (card of kpiCards; track card.label) {
+        <div class="kpi-card" [ngClass]="'kpi-card--' + card.color">
+          <div class="kpi-top">
+            <span class="kpi-label">{{ card.label }}</span>
+            <div class="kpi-icon" [ngClass]="'kpi-icon--' + card.color">
+              <span class="material-icons">{{ card.icon }}</span>
+            </div>
+          </div>
+          <div class="kpi-value">{{ card.value }}</div>
+          <div class="kpi-sub">{{ card.sub }}</div>
+        </div>
+      }
+    </div>
+
+    <!-- Bottom grid -->
+    <div class="bottom-grid">
+      <!-- Recent employees -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Funcionários Recentes</h3>
+          <a class="card-link" routerLink="/dashboard/hr/employees">Ver todos →</a>
+        </div>
+
+        @if (recentEmployees.length === 0) {
+          <div class="empty-mini">
+            <span class="material-icons">people_outline</span>
+            Nenhum funcionário cadastrado
+          </div>
+        } @else {
+          <div class="emp-list">
+            @for (emp of recentEmployees; track emp.id) {
+              <div class="emp-row">
+                <div class="emp-avatar">{{ initials(emp.name) }}</div>
+                <div class="emp-info">
+                  <span class="emp-name">{{ emp.name }}</span>
+                  <span class="emp-sub">{{ emp.role }} · {{ getDeptLabel(emp.department) }}</span>
+                </div>
+                <div class="emp-right">
+                  <span class="status-dot" [ngClass]="getStatusDot(emp.status)"></span>
+                  <span class="emp-salary">{{ formatBRL(emp.salary) }}</span>
+                </div>
+              </div>
+            }
+          </div>
+        }
+      </div>
+
+      <!-- Department distribution -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Por Departamento</h3>
+          <span class="card-count">{{ totalEmployees }} total</span>
+        </div>
+
+        @if (deptDistribution.length === 0) {
+          <div class="empty-mini">
+            <span class="material-icons">bar_chart</span>
+            Dados insuficientes
+          </div>
+        } @else {
+          <div class="dept-list">
+            @for (dept of deptDistribution; track dept.name) {
+              <div class="dept-row">
+                <span class="dept-name">{{ dept.label }}</span>
+                <div class="dept-bar-track">
+                  <div class="dept-bar" [style.width.%]="(dept.count / maxDeptCount) * 100"></div>
+                </div>
+                <span class="dept-count">{{ dept.count }}</span>
+              </div>
+            }
+          </div>
+        }
+      </div>
+    </div>
+  }
+</div>

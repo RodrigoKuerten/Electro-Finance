@@ -1,0 +1,221 @@
+<div class="page">
+
+  <!-- Header -->
+  <div class="page-header">
+    <div class="header-left">
+      <h1 class="page-title">Folha de Pagamento</h1>
+      <p class="page-date">{{ currentDate }}</p>
+    </div>
+    <div class="header-right">
+      <div class="period-chip">
+        <span class="material-icons">calendar_today</span>
+        {{ currentPeriod }}
+        <span class="material-icons period-caret">expand_more</span>
+      </div>
+      <button class="btn-outline">
+        <span class="material-icons">file_download</span>
+        Exportar
+      </button>
+      <button class="btn-primary" (click)="generate()" [class.btn-primary--loading]="generating()">
+        @if (generating()) {
+          <span class="btn-spinner"></span>
+          Calculando...
+        } @else {
+          <span class="material-icons">calculate</span>
+          Gerar Folha
+        }
+      </button>
+    </div>
+  </div>
+
+  <!-- KPI cards -->
+  <div class="kpi-grid">
+    <div class="kpi-card kpi-card--green">
+      <div class="kpi-top">
+        <div class="kpi-label">Folha Bruta</div>
+        <div class="kpi-icon kpi-icon--green">
+          <span class="material-icons">payments</span>
+        </div>
+      </div>
+      <div class="kpi-value">{{ formatBRL(totalBruto) }}</div>
+      <div class="kpi-sub">{{ totalCount }} colaboradores</div>
+    </div>
+
+    <div class="kpi-card kpi-card--blue">
+      <div class="kpi-top">
+        <div class="kpi-label">Total Líquido</div>
+        <div class="kpi-icon kpi-icon--blue">
+          <span class="material-icons">account_balance_wallet</span>
+        </div>
+      </div>
+      <div class="kpi-value">{{ formatBRL(totalLiquido) }}</div>
+      <div class="kpi-sub">a depositar</div>
+    </div>
+
+    <div class="kpi-card kpi-card--amber">
+      <div class="kpi-top">
+        <div class="kpi-label">Encargos FGTS</div>
+        <div class="kpi-icon kpi-icon--amber">
+          <span class="material-icons">account_balance</span>
+        </div>
+      </div>
+      <div class="kpi-value">{{ formatBRL(totalFgts) }}</div>
+      <div class="kpi-sub">custo patronal</div>
+    </div>
+
+    <div class="kpi-card kpi-card--purple">
+      <div class="kpi-top">
+        <div class="kpi-label">Status da Folha</div>
+        <div class="kpi-icon kpi-icon--purple">
+          <span class="material-icons">fact_check</span>
+        </div>
+      </div>
+      <div class="kpi-value">{{ aprovados }}<span class="kpi-value-of">/{{ totalCount }}</span></div>
+      <div class="kpi-sub">
+        aprovados · {{ pendentes }} pendente{{ pendentes !== 1 ? 's' : '' }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Toolbar -->
+  <div class="toolbar">
+    <div class="search-wrap">
+      <span class="material-icons search-icon">search</span>
+      <input class="search-input"
+             type="text"
+             placeholder="Buscar colaborador, cargo ou departamento..."
+             [value]="search()"
+             (input)="setSearch($any($event.target).value)" />
+    </div>
+
+    <div class="filter-pills">
+      @for (opt of ['TODOS','PENDENTE','CALCULADO','APROVADO']; track opt) {
+        <button class="filter-pill"
+                [class.filter-pill--active]="statusFilter() === opt"
+                [class.filter-pill--pendente]="opt === 'PENDENTE' && statusFilter() === opt"
+                [class.filter-pill--calculado]="opt === 'CALCULADO' && statusFilter() === opt"
+                [class.filter-pill--aprovado]="opt === 'APROVADO' && statusFilter() === opt"
+                (click)="setFilter($any(opt))">
+          {{ opt === 'TODOS' ? 'Todos' : opt === 'PENDENTE' ? 'Pendente' : opt === 'CALCULADO' ? 'Calculado' : 'Aprovado' }}
+        </button>
+      }
+    </div>
+
+    @if (filtered().length > 0 && filtered()[0].status === 'CALCULADO') {
+      <button class="btn-approve-all" (click)="approveAll()">
+        <span class="material-icons">done_all</span>
+        Aprovar calculados
+      </button>
+    }
+  </div>
+
+  <!-- Table -->
+  <div class="table-wrap">
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="th-emp">Colaborador</th>
+          <th>Departamento</th>
+          <th>Tipo</th>
+          <th class="th-num">Sal. Bruto</th>
+          <th class="th-num">INSS</th>
+          <th class="th-num">IRRF</th>
+          <th class="th-num">VT</th>
+          <th class="th-num">FGTS</th>
+          <th class="th-num th-liquido">Líquido</th>
+          <th>Status</th>
+          <th class="th-actions">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        @if (filtered().length === 0) {
+          <tr>
+            <td colspan="11" class="empty-row">
+              <span class="material-icons">search_off</span>
+              Nenhum resultado para "{{ search() }}"
+            </td>
+          </tr>
+        }
+        @for (entry of filtered(); track entry.id; let i = $index) {
+          <tr class="tr" [style.animation-delay]="(i * 0.04) + 's'">
+            <td class="td-emp">
+              <div class="emp-cell">
+                <div class="emp-avatar" [class.emp-avatar--aprovado]="entry.status === 'APROVADO'">
+                  {{ entry.initials }}
+                </div>
+                <div class="emp-info">
+                  <span class="emp-name">{{ entry.name }}</span>
+                  <span class="emp-role">{{ entry.role }}</span>
+                </div>
+              </div>
+            </td>
+            <td class="td-dept">{{ entry.department }}</td>
+            <td>
+              <span class="contract-badge contract-badge--{{ entry.contractType.toLowerCase() }}">
+                {{ contractLabel(entry.contractType) }}
+              </span>
+            </td>
+            <td class="td-num">{{ formatBRL(entry.salaryBruto) }}</td>
+            <td class="td-num td-deduction">
+              @if (entry.inss > 0) { – {{ formatBRL(entry.inss) }} }
+              @else { <span class="td-exempt">–</span> }
+            </td>
+            <td class="td-num td-deduction">
+              @if (entry.irrf > 0) { – {{ formatBRL(entry.irrf) }} }
+              @else { <span class="td-exempt">Isento</span> }
+            </td>
+            <td class="td-num td-deduction">
+              @if (entry.vt > 0) { – {{ formatBRL(entry.vt) }} }
+              @else { <span class="td-exempt">–</span> }
+            </td>
+            <td class="td-num td-fgts">
+              @if (entry.fgts > 0) { {{ formatBRL(entry.fgts) }} }
+              @else { <span class="td-exempt">–</span> }
+            </td>
+            <td class="td-num td-liquido">{{ formatBRL(entry.salaryLiquido) }}</td>
+            <td>
+              <span class="status-badge status-badge--{{ entry.status.toLowerCase() }}">
+                <span class="status-dot"></span>
+                {{ statusLabel(entry.status) }}
+              </span>
+            </td>
+            <td class="td-actions">
+              <div class="actions-wrap">
+                <button class="action-btn" title="Ver holerite">
+                  <span class="material-icons">receipt</span>
+                </button>
+                @if (entry.status === 'CALCULADO') {
+                  <button class="action-btn action-btn--approve" title="Aprovar" (click)="approve(entry)">
+                    <span class="material-icons">check_circle</span>
+                  </button>
+                }
+              </div>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Footer summary -->
+  <div class="table-footer">
+    <span class="footer-count">{{ filtered().length }} de {{ totalCount }} colaboradores</span>
+    <div class="footer-totals">
+      <span class="footer-total-item">
+        <span class="footer-total-label">INSS Total</span>
+        <span class="footer-total-value footer-total-value--deduction">{{ formatBRL(totalInss) }}</span>
+      </span>
+      <span class="footer-sep">·</span>
+      <span class="footer-total-item">
+        <span class="footer-total-label">FGTS Patronal</span>
+        <span class="footer-total-value footer-total-value--fgts">{{ formatBRL(totalFgts) }}</span>
+      </span>
+      <span class="footer-sep">·</span>
+      <span class="footer-total-item">
+        <span class="footer-total-label">Líquido Total</span>
+        <span class="footer-total-value footer-total-value--green">{{ formatBRL(totalLiquido) }}</span>
+      </span>
+    </div>
+  </div>
+
+</div>

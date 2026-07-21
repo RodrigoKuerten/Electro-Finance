@@ -1,0 +1,113 @@
+<!-- Mobile top bar -->
+<header class="topbar">
+  <a class="logo" routerLink="/">
+    <span class="logo-mark">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+        <rect x="2" y="4"  width="20" height="3.5" rx="1.75" fill="url(#lg-top)"/>
+        <rect x="2" y="10" width="14" height="3.5" rx="1.75" fill="url(#lg-top)"/>
+        <rect x="2" y="16" width="8"  height="3.5" rx="1.75" fill="url(#lg-top)"/>
+        <defs>
+          <linearGradient id="lg-top" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%"   stop-color="#10b981"/>
+            <stop offset="100%" stop-color="#6ee7b7"/>
+          </linearGradient>
+        </defs>
+      </svg>
+    </span>
+    <span class="logo-text">Electro<span class="logo-accent">Finance</span></span>
+  </a>
+  <button class="hamburger" (click)="toggleSidebar()" [class.hamburger--open]="sidebarOpen" aria-label="Menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Overlay backdrop (mobile) -->
+<div class="sidebar-overlay" [class.visible]="sidebarOpen" (click)="closeSidebar()"></div>
+
+<div class="layout">
+
+  <!-- Sidebar -->
+  <aside class="sidebar" [class.sidebar--open]="sidebarOpen">
+
+    <div class="sidebar-header">
+      <a class="logo" routerLink="/" (click)="closeSidebar()">
+        <span class="logo-mark">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <rect x="2" y="4"  width="20" height="3.5" rx="1.75" fill="url(#lg-dash)"/>
+            <rect x="2" y="10" width="14" height="3.5" rx="1.75" fill="url(#lg-dash)"/>
+            <rect x="2" y="16" width="8"  height="3.5" rx="1.75" fill="url(#lg-dash)"/>
+            <defs>
+              <linearGradient id="lg-dash" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%"   stop-color="#10b981"/>
+                <stop offset="100%" stop-color="#6ee7b7"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </span>
+        <span class="logo-text">Electro<span class="logo-accent">Finance</span></span>
+      </a>
+      <button class="close-btn" (click)="closeSidebar()" aria-label="Fechar menu">
+        <span class="material-icons">close</span>
+      </button>
+    </div>
+
+    <nav class="nav">
+      <div class="nav-label-group">MÓDULOS</div>
+
+      @for (mod of modules; track mod.id) {
+        <div class="module" [class.module--open]="mod.expanded" [class.module--soon]="mod.soon">
+
+          <button class="module-header" (click)="toggle(mod)" [attr.aria-expanded]="mod.expanded">
+            <span class="module-icon-wrap">
+              <span class="material-icons module-icon">{{ mod.icon }}</span>
+            </span>
+            <span class="module-label">{{ mod.label }}</span>
+            @if (mod.soon) {
+              <span class="soon-badge">em breve</span>
+            } @else {
+              <span class="material-icons module-chevron">chevron_right</span>
+            }
+          </button>
+
+          @if (!mod.soon) {
+            <div class="module-children" [class.open]="mod.expanded">
+              @for (item of mod.items; track item.path; let i = $index) {
+                <a class="nav-item"
+                   [routerLink]="item.path"
+                   routerLinkActive="active"
+                   (click)="closeSidebar()"
+                   [style.animation-delay]="mod.expanded ? (i * 0.035) + 's' : '0s'">
+                  <span class="material-icons nav-icon">{{ item.icon }}</span>
+                  <span class="nav-item-label">{{ item.label }}</span>
+                </a>
+              }
+            </div>
+          }
+
+        </div>
+      }
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-row">
+        <div class="user-avatar">R</div>
+        <div class="user-meta">
+          <span class="user-name">Rodrigo K.</span>
+          <span class="user-role">Administrador</span>
+        </div>
+      </div>
+      <button class="logout-btn" (click)="logout()" title="Sair">
+        <span class="material-icons">logout</span>
+      </button>
+    </div>
+
+  </aside>
+
+  <!-- Content -->
+  <main class="content">
+    <router-outlet />
+  </main>
+
+</div>

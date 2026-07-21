@@ -1,0 +1,237 @@
+<div class="page">
+  <!-- Page Header -->
+  <header class="page-header">
+    <div>
+      <h1 class="page-title">Funcionários</h1>
+      <p class="page-subtitle">Gerenciamento de colaboradores</p>
+    </div>
+    <button class="btn-primary" (click)="openCreate()">
+      <span class="material-icons">add</span>
+      Novo Funcionário
+    </button>
+  </header>
+
+  <!-- Toolbar -->
+  <div class="toolbar">
+    <div class="search-wrap">
+      <span class="material-icons search-icon">search</span>
+      <input
+        class="search-input"
+        type="text"
+        placeholder="Buscar por nome, CPF, cargo, departamento..."
+        [(ngModel)]="searchQuery"
+        (ngModelChange)="applyFilter()"
+      />
+    </div>
+    <span class="results-label">
+      {{ filteredEmployees.length }} {{ filteredEmployees.length === 1 ? 'resultado' : 'resultados' }}
+    </span>
+  </div>
+
+  <!-- States -->
+  @if (loading) {
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <span>Carregando funcionários...</span>
+    </div>
+  } @else if (filteredEmployees.length === 0) {
+    <div class="empty-state">
+      <span class="material-icons empty-icon">people_outline</span>
+      <h3 class="empty-title">
+        {{ searchQuery ? 'Nenhum resultado' : 'Nenhum funcionário cadastrado' }}
+      </h3>
+      <p class="empty-sub">
+        {{ searchQuery ? 'Tente ajustar os termos da busca.' : 'Comece cadastrando o primeiro colaborador.' }}
+      </p>
+      @if (!searchQuery) {
+        <button class="btn-primary" (click)="openCreate()">
+          <span class="material-icons">add</span>
+          Novo Funcionário
+        </button>
+      }
+    </div>
+  } @else {
+    <!-- Data Table -->
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Funcionário</th>
+            <th>CPF</th>
+            <th>Cargo</th>
+            <th>Departamento</th>
+            <th>Contrato</th>
+            <th>Salário</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (emp of filteredEmployees; track emp.id) {
+            <tr>
+              <td>
+                <div class="emp-cell">
+                  <div class="emp-avatar">{{ initials(emp.name) }}</div>
+                  <div class="emp-info">
+                    <span class="emp-name">{{ emp.name }}</span>
+                    <span class="emp-email">{{ emp.email }}</span>
+                  </div>
+                </div>
+              </td>
+              <td class="td-mono">{{ emp.cpf }}</td>
+              <td>{{ emp.role }}</td>
+              <td>{{ getDeptLabel(emp.department) }}</td>
+              <td>{{ emp.contractType }}</td>
+              <td class="td-salary">{{ formatBRL(emp.salary) }}</td>
+              <td>
+                <span class="status-badge" [ngClass]="getStatusClass(emp.status)">
+                  {{ getStatusLabel(emp.status) }}
+                </span>
+              </td>
+              <td>
+                <div class="action-btns">
+                  <button class="action-btn" (click)="openEdit(emp)" title="Editar">
+                    <span class="material-icons">edit</span>
+                  </button>
+                  <button class="action-btn action-btn--danger" (click)="confirmDelete(emp.id!)" title="Excluir">
+                    <span class="material-icons">delete_outline</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>
+
+<!-- ── Create / Edit Modal ─────────────────────── -->
+@if (showModal) {
+  <div class="modal-overlay" (click)="closeModal()">
+    <div class="modal" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2 class="modal-title">{{ editingEmployee ? 'Editar Funcionário' : 'Novo Funcionário' }}</h2>
+        <button class="modal-close" (click)="closeModal()">
+          <span class="material-icons">close</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <!-- Dados Pessoais -->
+        <div class="form-section">
+          <div class="form-section-title">Dados Pessoais</div>
+          <div class="form-grid">
+            <div class="form-field form-field--full">
+              <label>Nome completo *</label>
+              <input type="text" [(ngModel)]="form.name" placeholder="Ex: Maria Oliveira" />
+            </div>
+            <div class="form-field">
+              <label>CPF *</label>
+              <input type="text" [(ngModel)]="form.cpf" placeholder="000.000.000-00" />
+            </div>
+            <div class="form-field">
+              <label>RG</label>
+              <input type="text" [(ngModel)]="form.rg" placeholder="00.000.000-0" />
+            </div>
+            <div class="form-field">
+              <label>Data de nascimento</label>
+              <input type="date" [(ngModel)]="form.birthDate" />
+            </div>
+            <div class="form-field">
+              <label>Telefone</label>
+              <input type="text" [(ngModel)]="form.phone" placeholder="(00) 00000-0000" />
+            </div>
+            <div class="form-field">
+              <label>E-mail *</label>
+              <input type="email" [(ngModel)]="form.email" placeholder="email@empresa.com" />
+            </div>
+            <div class="form-field form-field--full">
+              <label>Endereço</label>
+              <input type="text" [(ngModel)]="form.address" placeholder="Rua, número, bairro, cidade" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Dados Contratuais -->
+        <div class="form-section">
+          <div class="form-section-title">Dados Contratuais</div>
+          <div class="form-grid">
+            <div class="form-field">
+              <label>Cargo *</label>
+              <input type="text" [(ngModel)]="form.role" placeholder="Ex: Analista de RH" />
+            </div>
+            <div class="form-field">
+              <label>Departamento *</label>
+              <select [(ngModel)]="form.department">
+                @for (dept of departments; track dept) {
+                  <option [value]="dept">{{ getDeptLabel(dept) }}</option>
+                }
+              </select>
+            </div>
+            <div class="form-field">
+              <label>Data de admissão *</label>
+              <input type="date" [(ngModel)]="form.admissionDate" />
+            </div>
+            <div class="form-field">
+              <label>Tipo de contrato *</label>
+              <select [(ngModel)]="form.contractType">
+                @for (ct of contractTypes; track ct) {
+                  <option [value]="ct">{{ ct }}</option>
+                }
+              </select>
+            </div>
+            <div class="form-field">
+              <label>Salário (R$) *</label>
+              <input type="number" [(ngModel)]="form.salary" placeholder="0.00" min="0" step="0.01" />
+            </div>
+            <div class="form-field">
+              <label>Horas semanais</label>
+              <input type="number" [(ngModel)]="form.workHoursPerWeek" placeholder="44" min="0" max="168" />
+            </div>
+            <div class="form-field">
+              <label>Status *</label>
+              <select [(ngModel)]="form.status">
+                @for (s of statuses; track s) {
+                  <option [value]="s">{{ getStatusLabel(s) }}</option>
+                }
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-secondary" (click)="closeModal()">Cancelar</button>
+        <button class="btn-primary" (click)="save()" [disabled]="!isFormValid || saving">
+          @if (saving) { <div class="spinner-sm"></div> }
+          {{ editingEmployee ? 'Salvar alterações' : 'Cadastrar funcionário' }}
+        </button>
+      </div>
+    </div>
+  </div>
+}
+
+<!-- ── Delete Confirmation Modal ─────────────────────── -->
+@if (showDeleteModal) {
+  <div class="modal-overlay" (click)="cancelDelete()">
+    <div class="modal modal--sm" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2 class="modal-title">Confirmar exclusão</h2>
+        <button class="modal-close" (click)="cancelDelete()">
+          <span class="material-icons">close</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="delete-warn">
+          <span class="material-icons delete-warn-icon">warning_amber</span>
+          <p>Esta ação irá remover permanentemente o funcionário do sistema e não pode ser desfeita.</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" (click)="cancelDelete()">Cancelar</button>
+        <button class="btn-danger" (click)="doDelete()">Excluir funcionário</button>
+      </div>
+    </div>
+  </div>
+}
