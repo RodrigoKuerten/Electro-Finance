@@ -21,6 +21,7 @@ import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.HexFormat;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -31,14 +32,16 @@ public class AuthenticationService {
     private final UserDetailRepository userDetailRepository;
     private final HashPasswordService hashPasswordService;
     private final SendEmailService sendEmailService;
+    private final EmailTemplateService emailTemplateService;
     private final JwtService jwtService;
     private final RevokedTokenRepository revokedTokenRepository;
 
-    public AuthenticationService(UserRepository userRepository, UserDetailRepository userDetailRepository, HashPasswordService hashPasswordService, SendEmailService sendEmailService, JwtService jwtService, RevokedTokenRepository revokedTokenRepository) {
+    public AuthenticationService(UserRepository userRepository, UserDetailRepository userDetailRepository, HashPasswordService hashPasswordService, SendEmailService sendEmailService, EmailTemplateService emailTemplateService, JwtService jwtService, RevokedTokenRepository revokedTokenRepository) {
         this.userRepository = userRepository;
         this.userDetailRepository = userDetailRepository;
         this.hashPasswordService = hashPasswordService;
         this.sendEmailService = sendEmailService;
+        this.emailTemplateService = emailTemplateService;
         this.jwtService = jwtService;
         this.revokedTokenRepository = revokedTokenRepository;
     }
@@ -126,11 +129,12 @@ public class AuthenticationService {
             userRepository.save(user);
 
             String resetLink = request.frontendUrl() + "/auth/reset-password?token=" + token;
-            sendEmailService.sendEmail(
-                request.email(),
-                "Recuperação de senha - Finance Dashboard",
-                "Clique no link abaixo para redefinir sua senha:\n\n" + resetLink + "\n\nO link expira em 1 hora.\n\nSe você não solicitou a recuperação, ignore este email."
+            String html = emailTemplateService.render(
+                "email.reset-password.template",
+                "templates/email/reset-password.html",
+                Map.of("resetLink", resetLink, "expiryHours", "1")
             );
+            sendEmailService.sendHtmlEmail(request.email(), "Recuperação de senha - Electro Finance", html);
         }
 
         return ResponseEntity.ok(new AuthResponse("Se o email existir em nossa base, você receberá um link de recuperação"));
