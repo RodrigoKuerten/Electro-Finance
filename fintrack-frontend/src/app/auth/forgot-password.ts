@@ -29,7 +29,7 @@ export class ForgotPassword {
     }
 
     this.isLoading.set(true);
-    this.http.post(`${environment.urlLocal}/auth/forgot-password`, {
+    this.http.post(`${environment.urlApi}/auth/forgot-password`, {
       email,
       frontendUrl: window.location.origin
     }).subscribe({

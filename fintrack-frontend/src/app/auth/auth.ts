@@ -55,7 +55,7 @@ export class Auth {
     const endpoint = isRegister ? '/auth/register' : '/auth/login';
 
     this.isLoading.set(true);
-    this.http.post(`${environment.urlLocal}${endpoint}`, body).subscribe({
+    this.http.post(`${environment.urlApi}${endpoint}`, body).subscribe({
       next: (response: any) => {
         this.isLoading.set(false);
         this.notif.add({ severity: 'success', summary: 'Sucesso', detail: response.message });

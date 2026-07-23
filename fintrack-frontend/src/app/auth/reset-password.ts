@@ -42,7 +42,7 @@ export class ResetPassword implements OnInit {
     }
 
     this.isLoading.set(true);
-    this.http.post(`${environment.urlLocal}/auth/reset-password`, {
+    this.http.post(`${environment.urlApi}/auth/reset-password`, {
       token: this.token,
       newPassword
     }).subscribe({
