@@ -1,6 +1,7 @@
 package com.github.rodrigokuerten.finance_dashboard.controller;
 
 import com.github.rodrigokuerten.finance_dashboard.service.AuthenticationService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,6 +21,11 @@ public class AuthenticationController {
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody AuthRequest request) {
         return authenticationService.login(request);
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<AuthResponse> logout(HttpServletRequest request) {
+        return authenticationService.logout(request);
     }
 
     @PostMapping("/register")

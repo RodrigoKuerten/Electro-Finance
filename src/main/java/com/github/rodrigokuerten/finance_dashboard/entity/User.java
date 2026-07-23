@@ -1,5 +1,6 @@
 package com.github.rodrigokuerten.finance_dashboard.entity;
 
+import com.github.rodrigokuerten.finance_dashboard.enums.RoleEnum;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -30,5 +31,9 @@ public class User {
 
     @Column(name = "reset_token_expiry")
     private LocalDateTime resetTokenExpiry;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role", nullable = false, columnDefinition = "VARCHAR(20) DEFAULT 'EMPLOYEE'")
+    private RoleEnum role = RoleEnum.EMPLOYEE;
 
 }
