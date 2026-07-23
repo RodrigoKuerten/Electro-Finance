@@ -18,10 +18,4 @@ public class SettingsService {
                 .map(Settings::getParamValue)
                 .orElseThrow(() -> new RuntimeException("Parâmetro não encontrado: " + key));
     }
-
-    public String getValueOrDefault(String key, String defaultValue) {
-        return repository.findByKey(key)
-                .map(Settings::getParamValue)
-                .orElse(defaultValue);
-    }
 }
