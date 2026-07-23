@@ -131,7 +131,6 @@ public class AuthenticationService {
             String resetLink = request.frontendUrl() + "/auth/reset-password?token=" + token;
             String html = emailTemplateService.render(
                 "email.reset-password.template",
-                "templates/email/reset-password.html",
                 Map.of("resetLink", resetLink, "expiryHours", "1")
             );
             sendEmailService.sendHtmlEmail(request.email(), "Recuperação de senha - Electro Finance", html);
