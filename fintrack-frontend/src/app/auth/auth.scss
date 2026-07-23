@@ -1,3 +1,4 @@
+@use '../shared/password-strength';
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap');
 
 $emerald:       #10b981;
@@ -417,6 +418,10 @@ $input-border:  rgba(255, 255, 255, 0.09);
     -webkit-text-fill-color: $text;
     transition: background-color 600000s;
   }
+}
+
+.password-strength {
+  animation: enterUp 0.3s ease-out both;
 }
 
 .forgot-btn {

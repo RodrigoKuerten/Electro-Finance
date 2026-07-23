@@ -86,12 +86,37 @@
           type="password"
           autocomplete="current-password"
           placeholder="••••••••"
+          (input)="isRegisterMode && onPasswordInput(passwordInput.value)"
         />
+
+        <div class="password-strength" *ngIf="isRegisterMode && passwordInput.value">
+          <div class="ps-bar">
+            <span class="ps-seg" [class.filled]="passwordScore() >= 1" [class.s1]="passwordScore() <= 2" [class.s2]="passwordScore() === 3" [class.s3]="passwordScore() >= 4"></span>
+            <span class="ps-seg" [class.filled]="passwordScore() >= 2" [class.s1]="passwordScore() <= 2" [class.s2]="passwordScore() === 3" [class.s3]="passwordScore() >= 4"></span>
+            <span class="ps-seg" [class.filled]="passwordScore() >= 3" [class.s1]="passwordScore() <= 2" [class.s2]="passwordScore() === 3" [class.s3]="passwordScore() >= 4"></span>
+            <span class="ps-seg" [class.filled]="passwordScore() >= 4" [class.s1]="passwordScore() <= 2" [class.s2]="passwordScore() === 3" [class.s3]="passwordScore() >= 4"></span>
+            <span class="ps-seg" [class.filled]="passwordScore() >= 5" [class.s1]="passwordScore() <= 2" [class.s2]="passwordScore() === 3" [class.s3]="passwordScore() >= 4"></span>
+          </div>
+          <p class="ps-label">{{ passwordLabel() }}</p>
+          <ul class="ps-checklist">
+            <li [class.ok]="passwordChecks().length">8+ caracteres</li>
+            <li [class.ok]="passwordChecks().upper">Letra maiúscula</li>
+            <li [class.ok]="passwordChecks().lower">Letra minúscula</li>
+            <li [class.ok]="passwordChecks().number">Número</li>
+            <li [class.ok]="passwordChecks().special">Caractere especial</li>
+          </ul>
+        </div>
       </div>
 
       <a *ngIf="!isRegisterMode" routerLink="/auth/forgot-password" class="forgot-btn">Esqueci minha senha</a>
 
       <div class="register-fields" [class.visible]="isRegisterMode">
+        
+        <div class="input-group">
+          <label class="input-label">Repita Sua Senha</label>
+          <input #repeatPasswordInput class="input-field" type="password" placeholder="••••••••" />
+        </div>
+
         <div class="form-divider"></div>
 
         <div class="input-group">
@@ -122,7 +147,8 @@
           isRegisterMode,
           isRegisterMode ? fullNameInput.value : undefined,
           isRegisterMode ? addressInput.value : undefined,
-          isRegisterMode ? phoneNumberInput.value : undefined
+          isRegisterMode ? phoneNumberInput.value : undefined,
+          isRegisterMode ? repeatPasswordInput.value : undefined
         )"
       >
         <span class="btn-text">{{ isRegisterMode ? 'Criar conta' : 'Entrar na plataforma' }}</span>

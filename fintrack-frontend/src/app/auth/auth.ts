@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { PageLoader } from '../shared/page-loader';
+import { checkPassword, isStrongPassword, passwordLabel, passwordScore, PasswordChecks } from '../shared/password-strength';
 
 @Component({
   selector: 'app-auth',
@@ -28,15 +29,28 @@ export class Auth {
   isRegisterMode = false;
   isLoading = signal(false);
 
+  passwordScore = signal(0);
+  passwordLabel = signal('');
+  passwordChecks = signal<PasswordChecks>({ length: false, upper: false, lower: false, number: false, special: false });
+
   toggleMode() {
     this.isRegisterMode = !this.isRegisterMode;
   }
 
-  submitAuth(email: string, password: string, isRegister: boolean, fullName?: string, address?: string, phoneNumber?: string): void {
+  onPasswordInput(password: string): void {
+    const checks = checkPassword(password);
+    this.passwordChecks.set(checks);
+    const score = passwordScore(checks);
+    this.passwordScore.set(score);
+    this.passwordLabel.set(passwordLabel(score));
+  }
+
+  submitAuth(email: string, password: string, isRegister: boolean, fullName?: string, address?: string, phoneNumber?: string, repeatPassword?: string): void {
     if (!email || !password) {
       this.notif.add({ severity: 'warn', summary: 'Campos obrigatórios', detail: 'Email e senha são obrigatórios.' });
       return;
     }
+
     if (!email.includes('@') || !email.includes('.')) {
       this.notif.add({ severity: 'warn', summary: 'Email inválido', detail: 'O email deve ser valido.' });
       return;
@@ -45,8 +59,18 @@ export class Auth {
     let body: any = { email, password };
 
     if (isRegister) {
-      if (!fullName || !address || !phoneNumber) {
+      if (!fullName || !address || !phoneNumber || !repeatPassword) {
         this.notif.add({ severity: 'warn', summary: 'Campos obrigatórios', detail: 'Preencha todos os dados para cadastro.' });
+        return;
+      }
+
+      if (password !== repeatPassword) {
+        this.notif.add({ severity: 'warn', summary: 'Senhas não conferem', detail: 'A senha e a confirmação devem ser iguais.' });
+        return;
+      }
+      
+      if (!isStrongPassword(password)) {
+        this.notif.add({ severity: 'warn', summary: 'Senha fraca', detail: 'A senha deve ter 8+ caracteres, maiúscula, minúscula, número e caractere especial.' });
         return;
       }
       body = { email, password, fullName, address, phoneNumber };
