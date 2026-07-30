@@ -1,0 +1,64 @@
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="logo">
+        <span class="logo-mark">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <rect x="2" y="4"  width="20" height="3.5" rx="1.75" fill="url(#lg-sidebar)"/>
+            <rect x="2" y="10" width="14" height="3.5" rx="1.75" fill="url(#lg-sidebar)"/>
+            <rect x="2" y="16" width="8"  height="3.5" rx="1.75" fill="url(#lg-sidebar)"/>
+            <defs>
+              <linearGradient id="lg-sidebar" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%"   stop-color="#10b981"/>
+                <stop offset="100%" stop-color="#6ee7b7"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </span>
+        <span class="logo-text">Electro<span class="logo-accent">Finance</span></span>
+      </div>
+      <span class="rh-badge">RH</span>
+    </div>
+
+    <nav class="nav">
+      <div class="nav-group-label">RH CORE</div>
+      @for (item of coreItems; track item.path) {
+        <a class="nav-item"
+           [routerLink]="item.path"
+           routerLinkActive="active"
+           [routerLinkActiveOptions]="{ exact: true }">
+          <span class="material-icons nav-icon">{{ item.icon }}</span>
+          <span class="nav-label">{{ item.label }}</span>
+        </a>
+      }
+
+      <div class="nav-group-label nav-group-label--modules">MÓDULOS</div>
+      @for (item of moduleItems; track item.path) {
+        <a class="nav-item"
+           [routerLink]="item.path"
+           routerLinkActive="active"
+           [routerLinkActiveOptions]="{ exact: true }">
+          <span class="material-icons nav-icon">{{ item.icon }}</span>
+          <span class="nav-label">{{ item.label }}</span>
+        </a>
+      }
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-row">
+        <div class="user-avatar">R</div>
+        <div class="user-meta">
+          <span class="user-name">Rodrigo K.</span>
+          <span class="user-role">Administrador</span>
+        </div>
+      </div>
+      <button class="logout-btn" (click)="logout()" title="Sair">
+        <span class="material-icons">logout</span>
+      </button>
+    </div>
+  </aside>
+
+  <main class="content">
+    <router-outlet />
+  </main>
+</div>
