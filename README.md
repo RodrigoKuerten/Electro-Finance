@@ -1,6 +1,6 @@
-# > 🚧 Projeto ainda em desenvolvimento.
-
 # ⚡ Electro Finance
+
+> 🚧 **Projeto ainda em desenvolvimento.**
 
 Projeto Full Stack para controle de finanças pessoais, com gerenciamento de receitas, despesas e movimentações.
 
